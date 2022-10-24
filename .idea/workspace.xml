@@ -36,8 +36,8 @@
     <property name="node.js.selected.package.stylelint" value="C:\Users\user\WORK\myProjects\ReactTemplate\node_modules\stylelint" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="prettierjs.PrettierConfiguration.Package" value="C:\Users\user\WORK\myProjects\ReactTemplate\node_modules\prettier" />
-    <property name="settings.editor.selected.configurable" value="watcher.settings" />
-    <property name="ts.external.directory.path" value="C:\Users\user\WORK\myProjects\ReactTemplate\node_modules\typescript\lib" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="ts.external.directory.path" value="C:\Users\user\WORK\myProjects\CanbanBoard\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -77,7 +77,7 @@
       <workItem from="1666595913994" duration="5258000" />
       <workItem from="1666602155960" duration="4294000" />
       <workItem from="1666608710477" duration="4575000" />
-      <workItem from="1666613852151" duration="36000" />
+      <workItem from="1666613852151" duration="308000" />
     </task>
     <servers />
   </component>
