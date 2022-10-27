@@ -1,16 +1,18 @@
 .card {
   min-height: 50px;
   padding: 16px;
-  color: #333;
+  color: #484848;
   font-weight: 500;
-  line-height: 1;
-  text-align: center;
-  background-color: rgba(227, 227, 227, 0.66);
+  font-size: 15px;
+  line-height: 1.2;
+  background-color: #fff;
   border-radius: 8px;
+  box-shadow: 0 0 4px 2px #e5e5e5;
   cursor: pointer;
   transition: all 0.1s linear;
 
   &:hover {
     background-color: #fafafa;
+    box-shadow: 0 0 4px 4px #e5e5e5;
   }
 }

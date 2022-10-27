@@ -1,11 +1,15 @@
 import React from 'react'
 
+import { Sidebar } from './components/Sidebar'
 import { MainPage } from './pages/MainPage'
 
 function App() {
   return (
-    <div className="mask">
-      <div className="page-container">
+    <div className="page">
+      <div className="container">
+        <div className="left">
+          <Sidebar />
+        </div>
         <MainPage />
       </div>
     </div>

@@ -5,7 +5,8 @@ import { Board } from './components/Board'
 
 export const MainPage = () => {
   return (
-    <div className="main-page-container">
+    <div className="main-page">
+      <h1 className="title">Kanban</h1>
       <Board />
     </div>
   )

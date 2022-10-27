@@ -2,12 +2,12 @@ import React, { DragEvent, useEffect, useRef, useState } from 'react'
 
 import './board.scss'
 import {
+  CardsIcons,
   DataCards,
   ICardItem,
   IDataCards,
 } from '@App/pages/MainPage/components/Board/DataCards'
 
-import { BoardHeader } from '../BoardHeader'
 import { Card } from '../Card'
 
 export interface IMoveCardsParams {
@@ -91,44 +91,68 @@ export const Board = () => {
     })
   }, [moveCardsParams.cardId])
 
-  return (
-    <div className="board-container">
-      <div className="board">
-        <BoardHeader dataCards={dataCards} />
+  function getFormattedText(str: string) {
+    let formattedText = ''
+    str.split('').map((el, index) => {
+      if (el === el.toUpperCase()) {
+        formattedText += ' '
+      }
+      formattedText += el
+    })
 
-        <div className="board-content">
-          {dataCards &&
-            (Object.keys(dataCards) as (keyof IDataCards)[]).map(
-              (cardKey: keyof IDataCards) => (
-                <div
-                  key={cardKey}
-                  className="col"
-                  onDragOver={(e) => dragOver(e, cardKey)}
-                >
-                  {dataCards[cardKey].map((card: ICardItem, index) => (
-                    <Card
-                      key={index}
-                      item={card}
-                      initCol={cardKey}
-                      moveCardsParams={moveCardsParams}
-                      setSelectedCard={setSelectedCard}
-                      setMoveCardsParams={setMoveCardsParams}
-                    />
-                  ))}
-                  <div
-                    className={`card-placeholder ${
-                      moveCardsParams.targetCol === cardKey &&
-                      moveCardsParams.targetCol !== selectedCard?.initCol &&
-                      'highlight'
-                    }`}
-                  >
-                    {selectedCard?.cardText}
-                  </div>
+    return formattedText
+  }
+
+  return (
+    <div className="board">
+      {dataCards &&
+        (Object.keys(dataCards) as (keyof IDataCards)[]).map(
+          (cardKey: keyof IDataCards) => (
+            <div
+              key={cardKey}
+              className={`col ${
+                moveCardsParams.targetCol === cardKey &&
+                moveCardsParams.targetCol !== selectedCard?.initCol &&
+                'highlight'
+              }`}
+              onDragOver={(e) => dragOver(e, cardKey)}
+            >
+              <div className="header">
+                <div className="header-icon">
+                  <img src={CardsIcons[cardKey]} alt="" />
                 </div>
-              ),
-            )}
-        </div>
-      </div>
+                <div className="header-text">
+                  <span>
+                    {getFormattedText(cardKey)}
+                    <div className="header-count">
+                      <span>{dataCards[cardKey].length}</span>
+                    </div>
+                  </span>
+                </div>
+              </div>
+
+              {dataCards[cardKey].map((card: ICardItem, index) => (
+                <Card
+                  key={index}
+                  item={card}
+                  initCol={cardKey}
+                  moveCardsParams={moveCardsParams}
+                  setSelectedCard={setSelectedCard}
+                  setMoveCardsParams={setMoveCardsParams}
+                />
+              ))}
+              <div
+                className={`card-placeholder ${
+                  moveCardsParams.targetCol === cardKey &&
+                  moveCardsParams.targetCol !== selectedCard?.initCol &&
+                  'highlight'
+                }`}
+              >
+                {selectedCard?.cardText}
+              </div>
+            </div>
+          ),
+        )}
     </div>
   )
 }

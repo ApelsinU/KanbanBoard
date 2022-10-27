@@ -1,3 +1,7 @@
+import DoneIcon from '@Assets/icons/accepted.png'
+import ToDoListIcon from '@Assets/icons/check-list.png'
+import TimeIcon from '@Assets/icons/hourglass.png' // time
+
 export interface ICardItem {
   text: string
   id: number
@@ -7,6 +11,12 @@ export interface IDataCards {
   toDo: ICardItem[]
   inProgress: ICardItem[]
   done: ICardItem[]
+}
+
+export const CardsIcons = {
+  toDo: ToDoListIcon,
+  inProgress: TimeIcon,
+  done: DoneIcon,
 }
 
 export const DataCards: IDataCards = {

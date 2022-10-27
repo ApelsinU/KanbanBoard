@@ -1,15 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b22103b0-f61a-4349-921e-4c6ea2148036" name="Changes" comment="[Canban] - rm useRef from card drag-logic, add counters to header">
+    <list default="true" id="b22103b0-f61a-4349-921e-4c6ea2148036" name="Changes" comment="[Design] - add new design">
+      <change afterPath="$PROJECT_DIR$/src/assets/icons/accepted.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/icons/check-list.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/icons/check.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/icons/document.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/icons/hourglass.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/icons/listing.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/icons/loading.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/icons/tick.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/icons/time.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/icons/to-do-list.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/images/logo-2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/images/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Sidebar/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Sidebar/sidebar.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/MainPage/components/Board/DataCards.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MainPage/components/Board/DataCards.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/MainPage/components/Board/board.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MainPage/components/Board/board.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/MainPage/components/Board/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MainPage/components/Board/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/MainPage/components/BoardHeader/board-header.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MainPage/components/BoardHeader/board-header.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/MainPage/components/BoardHeader/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MainPage/components/BoardHeader/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/MainPage/components/BoardHeader/board-header.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/MainPage/components/BoardHeader/index.tsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/MainPage/components/Card/card.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MainPage/components/Card/card.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/MainPage/components/Card/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MainPage/components/Card/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/MainPage/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MainPage/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/MainPage/main-page.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MainPage/main-page.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/global.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/global.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +34,11 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -51,6 +73,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\user\WORK\myProjects\CanbanBoard\src\assets" />
       <recent name="C:\Users\user\WORK\myProjects\CanbanBoard\src\pages\MainPage" />
       <recent name="C:\Users\user\WORK\myProjects\ReactTemplate\src\assets\fonts" />
       <recent name="C:\Users\user\WORK\myProjects\ReactTemplate" />
@@ -90,7 +113,7 @@
       <workItem from="1666613852151" duration="308000" />
       <workItem from="1666614170727" duration="406000" />
       <workItem from="1666781455756" duration="16547000" />
-      <workItem from="1666855205468" duration="15627000" />
+      <workItem from="1666855205468" duration="23801000" />
     </task>
     <task id="LOCAL-00001" summary="some fixes">
       <created>1666614212557</created>
@@ -120,7 +143,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666867097961</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="[Canban] - add placeholder card">
+      <created>1666873850248</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1666873850248</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -143,7 +173,9 @@
     <MESSAGE value="[Canban] - main page, board; start logic for drag &amp; drop" />
     <MESSAGE value="[Canban] - drag &amp; drop - fix bug" />
     <MESSAGE value="[Canban] - rm useRef from card drag-logic, add counters to header" />
-    <option name="LAST_COMMIT_MESSAGE" value="[Canban] - rm useRef from card drag-logic, add counters to header" />
+    <MESSAGE value="[Canban] - add placeholder card" />
+    <MESSAGE value="[Design] - add new design" />
+    <option name="LAST_COMMIT_MESSAGE" value="[Design] - add new design" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
