@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b22103b0-f61a-4349-921e-4c6ea2148036" name="Changes" comment="[Canban] - main page, board; start logic for drag &amp; drop">
+    <list default="true" id="b22103b0-f61a-4349-921e-4c6ea2148036" name="Changes" comment="[Canban] - drag &amp; drop - fix bug">
+      <change afterPath="$PROJECT_DIR$/src/pages/MainPage/components/BoardHeader/board-header.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/MainPage/components/BoardHeader/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/MainPage/components/Board/DataCards.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MainPage/components/Board/DataCards.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/MainPage/components/Board/board.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MainPage/components/Board/board.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/MainPage/components/Board/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MainPage/components/Board/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/MainPage/components/Card/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MainPage/components/Card/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +35,7 @@
     <property name="javascript.nodejs.core.library.configured.version" value="16.13.0" />
     <property name="javascript.nodejs.core.library.typings.version" value="16.18.0" />
     <property name="js.linters.configure.manually.selectedeslint" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../JsColors" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.detected.package.stylelint" value="true" />
@@ -84,7 +89,7 @@
       <workItem from="1666613852151" duration="308000" />
       <workItem from="1666614170727" duration="406000" />
       <workItem from="1666781455756" duration="16547000" />
-      <workItem from="1666855205468" duration="1338000" />
+      <workItem from="1666855205468" duration="10207000" />
     </task>
     <task id="LOCAL-00001" summary="some fixes">
       <created>1666614212557</created>
@@ -100,7 +105,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666798401803</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="[Canban] - drag &amp; drop - fix bug">
+      <created>1666856619828</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1666856619828</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -121,7 +133,8 @@
     <MESSAGE value="Init react-ts template; Add scss, stylelint/prettier/eslint; Connect alias and fix webpack-config with CRACO" />
     <MESSAGE value="some fixes" />
     <MESSAGE value="[Canban] - main page, board; start logic for drag &amp; drop" />
-    <option name="LAST_COMMIT_MESSAGE" value="[Canban] - main page, board; start logic for drag &amp; drop" />
+    <MESSAGE value="[Canban] - drag &amp; drop - fix bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="[Canban] - drag &amp; drop - fix bug" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

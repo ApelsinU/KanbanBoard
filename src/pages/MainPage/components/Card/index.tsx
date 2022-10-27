@@ -1,7 +1,9 @@
 import './card.scss'
+
 import { useRef, DragEvent } from 'react'
 
-import { IMoveCardsParams, ICardItem } from '../Board'
+import { IMoveCardsParams } from '../Board'
+import { ICardItem } from '../Board/DataCards'
 
 interface ICardProps {
   item: ICardItem
@@ -14,16 +16,17 @@ export const Card = ({
   moveCardsParams,
   setMoveCardsParams,
 }: ICardProps) => {
-  const dragCard = useRef(0)
+  // const dragCard = useRef(0)
 
-  const dragStart = (e: DragEvent, id: number) => {
-    dragCard.current = id
-  }
+  // const dragStart = (e: DragEvent, id: number) => {
+  //   console.log(e)
+  //   dragCard.current = id
+  // }
 
   const dragEnd = () => {
     setMoveCardsParams({
       ...moveCardsParams,
-      cardId: dragCard.current,
+      cardId: item.id,
       cardText: item.text,
     })
   }
@@ -32,7 +35,7 @@ export const Card = ({
     <div
       className="card"
       draggable
-      onDragStart={(e) => dragStart(e, item.id)}
+      //onDragStart={(e) => dragStart(e, item.id)}
       onDragEnd={dragEnd}
     >
       {item.text}
