@@ -3,8 +3,6 @@ import React, { DragEvent, useEffect, useRef, useState } from 'react'
 import './board.scss'
 import { Card } from '../Card'
 
-// import { DataCards, ICardItem } from './DataCards'
-
 export interface ICardItem {
   text: string
   id: number
@@ -47,10 +45,6 @@ export const Board = () => {
     setDataCards(DataCards)
   }, [])
 
-  useEffect(() => {
-    console.log(moveCardsParams)
-  }, [moveCardsParams])
-
   const dragOverCol = useRef<IMoveCardsParams['targetCol']>()
 
   const dragOver = (e: DragEvent, col: IMoveCardsParams['targetCol']) => {
@@ -59,13 +53,7 @@ export const Board = () => {
   }
 
   useEffect(() => {
-    console.log('moveCardsParams', typeof moveCardsParams.targetCol)
-
-    if (dataCards) {
-      // const draggedCard: ICardItem = {
-      //   id: moveCardsParams.cardId,
-      //   text: moveCardsParams.cardText,
-      // }
+    if (dataCards && moveCardsParams.cardId !== 0) {
       let draggedCard: ICardItem = {
         id: 0,
         text: '',
@@ -91,9 +79,6 @@ export const Board = () => {
       const sourceArr = [...sourceCol]
       const targetArr = [...targetCol]
 
-      console.log('sourceType', sourceType)
-      console.log('targetType', targetType)
-
       const updatedCols = {
         ...dataCards,
         [sourceType]: sourceArr,
@@ -104,13 +89,13 @@ export const Board = () => {
 
       sourceArr.splice(sourceArr.indexOf(draggedCard), 1)
       targetArr.push(draggedCard)
-
-      console.log('sourceArr', sourceArr)
-      console.log('targetArr', targetArr)
-      console.log(draggedCard)
     }
 
-    //    dataCards && draggedCard && Object.values(dataCards).find(draggedCard)
+    setMoveCardsParams({
+      cardId: 0,
+      targetCol: 'notStarted',
+      cardText: '',
+    })
   }, [moveCardsParams.cardId])
 
   return (
