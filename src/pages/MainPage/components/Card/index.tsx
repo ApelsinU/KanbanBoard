@@ -1,27 +1,30 @@
 import './card.scss'
 
-import { useRef, DragEvent } from 'react'
-
-import { IMoveCardsParams } from '../Board'
-import { ICardItem } from '../Board/DataCards'
+import { IMoveCardsParams, ISelectedCard } from '../Board'
+import { ICardItem, IDataCards } from '../Board/DataCards'
 
 interface ICardProps {
   item: ICardItem
   moveCardsParams: IMoveCardsParams
   setMoveCardsParams: (moveCardParams: IMoveCardsParams) => void
+  setSelectedCard: (moveCardParams: ISelectedCard) => void
+  initCol: keyof IDataCards
 }
 
 export const Card = ({
   item,
   moveCardsParams,
   setMoveCardsParams,
+  setSelectedCard,
+  initCol,
 }: ICardProps) => {
-  // const dragCard = useRef(0)
-
-  // const dragStart = (e: DragEvent, id: number) => {
-  //   console.log(e)
-  //   dragCard.current = id
-  // }
+  const dragStart = () => {
+    setSelectedCard({
+      cardId: item.id,
+      cardText: item.text,
+      initCol: initCol,
+    })
+  }
 
   const dragEnd = () => {
     setMoveCardsParams({
@@ -32,12 +35,7 @@ export const Card = ({
   }
 
   return (
-    <div
-      className="card"
-      draggable
-      //onDragStart={(e) => dragStart(e, item.id)}
-      onDragEnd={dragEnd}
-    >
+    <div className="card" draggable onDragStart={dragStart} onDragEnd={dragEnd}>
       {item.text}
     </div>
   )

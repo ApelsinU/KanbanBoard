@@ -12,17 +12,24 @@ import { Card } from '../Card'
 
 export interface IMoveCardsParams {
   cardId: number
-  targetCol: keyof IDataCards //'notStarted' | 'inProgress' | 'completed'
+  targetCol: keyof IDataCards | 'noStatus'
   cardText: string
+}
+
+export interface ISelectedCard {
+  cardId: number
+  cardText: string
+  initCol: keyof IDataCards
 }
 
 export const Board = () => {
   const [dataCards, setDataCards] = useState<IDataCards | null>(null)
   const [moveCardsParams, setMoveCardsParams] = useState<IMoveCardsParams>({
     cardId: 0,
-    targetCol: 'notStarted',
+    targetCol: 'noStatus',
     cardText: '',
   })
+  const [selectedCard, setSelectedCard] = useState<ISelectedCard | null>(null)
 
   useEffect(() => {
     setDataCards(DataCards)
@@ -45,7 +52,10 @@ export const Board = () => {
       let sourceType = ''
       const targetType = moveCardsParams.targetCol
       let sourceCol: ICardItem[] = []
-      const targetCol: ICardItem[] = dataCards[moveCardsParams.targetCol]
+      const targetCol: ICardItem[] =
+        moveCardsParams.targetCol !== 'noStatus'
+          ? dataCards[moveCardsParams.targetCol]
+          : []
 
       Object.entries(dataCards).map((cards: any) =>
         cards[1].map((card: ICardItem) => {
@@ -76,7 +86,7 @@ export const Board = () => {
 
     setMoveCardsParams({
       cardId: 0,
-      targetCol: 'notStarted',
+      targetCol: 'noStatus',
       cardText: '',
     })
   }, [moveCardsParams.cardId])
@@ -99,10 +109,21 @@ export const Board = () => {
                     <Card
                       key={index}
                       item={card}
+                      initCol={cardKey}
                       moveCardsParams={moveCardsParams}
+                      setSelectedCard={setSelectedCard}
                       setMoveCardsParams={setMoveCardsParams}
                     />
                   ))}
+                  <div
+                    className={`card-placeholder ${
+                      moveCardsParams.targetCol === cardKey &&
+                      moveCardsParams.targetCol !== selectedCard?.initCol &&
+                      'highlight'
+                    }`}
+                  >
+                    {selectedCard?.cardText}
+                  </div>
                 </div>
               ),
             )}

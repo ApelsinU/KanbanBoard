@@ -8,6 +8,18 @@ interface IBoardHeaderProps {
 }
 
 export const BoardHeader = ({ dataCards }: IBoardHeaderProps) => {
+  function getFormattedText(str: string) {
+    let formattedText = ''
+    str.split('').map((el, index) => {
+      if (el === el.toUpperCase()) {
+        formattedText += ' '
+      }
+      formattedText += el
+    })
+
+    return formattedText
+  }
+
   return (
     <div className="board-header">
       {dataCards &&
@@ -15,7 +27,7 @@ export const BoardHeader = ({ dataCards }: IBoardHeaderProps) => {
           <div key={index} className="col">
             <div className="col-header-text">
               <span>
-                {card[0]}
+                {getFormattedText(card[0])}
                 <div className="col-header-count">
                   <span>{card[1].length}</span>
                 </div>

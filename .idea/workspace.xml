@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b22103b0-f61a-4349-921e-4c6ea2148036" name="Changes" comment="[Canban] - drag &amp; drop - fix bug">
-      <change afterPath="$PROJECT_DIR$/src/pages/MainPage/components/BoardHeader/board-header.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/MainPage/components/BoardHeader/index.tsx" afterDir="false" />
+    <list default="true" id="b22103b0-f61a-4349-921e-4c6ea2148036" name="Changes" comment="[Canban] - rm useRef from card drag-logic, add counters to header">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/MainPage/components/Board/DataCards.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MainPage/components/Board/DataCards.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/MainPage/components/Board/board.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MainPage/components/Board/board.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/MainPage/components/Board/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MainPage/components/Board/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/MainPage/components/BoardHeader/board-header.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MainPage/components/BoardHeader/board-header.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/MainPage/components/BoardHeader/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MainPage/components/BoardHeader/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/MainPage/components/Card/card.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MainPage/components/Card/card.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/MainPage/components/Card/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MainPage/components/Card/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -89,7 +90,7 @@
       <workItem from="1666613852151" duration="308000" />
       <workItem from="1666614170727" duration="406000" />
       <workItem from="1666781455756" duration="16547000" />
-      <workItem from="1666855205468" duration="10207000" />
+      <workItem from="1666855205468" duration="15627000" />
     </task>
     <task id="LOCAL-00001" summary="some fixes">
       <created>1666614212557</created>
@@ -112,7 +113,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666856619828</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="[Canban] - rm useRef from card drag-logic, add counters to header">
+      <created>1666867097961</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1666867097961</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -134,7 +142,8 @@
     <MESSAGE value="some fixes" />
     <MESSAGE value="[Canban] - main page, board; start logic for drag &amp; drop" />
     <MESSAGE value="[Canban] - drag &amp; drop - fix bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="[Canban] - drag &amp; drop - fix bug" />
+    <MESSAGE value="[Canban] - rm useRef from card drag-logic, add counters to header" />
+    <option name="LAST_COMMIT_MESSAGE" value="[Canban] - rm useRef from card drag-logic, add counters to header" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

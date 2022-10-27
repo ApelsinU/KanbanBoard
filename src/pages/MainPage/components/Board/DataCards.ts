@@ -4,19 +4,19 @@ export interface ICardItem {
 }
 
 export interface IDataCards {
-  notStarted: ICardItem[]
+  toDo: ICardItem[]
   inProgress: ICardItem[]
-  completed: ICardItem[]
+  done: ICardItem[]
 }
 
 export const DataCards: IDataCards = {
-  notStarted: [
+  toDo: [
     { id: 1, text: 'Do tasks' },
     { id: 2, text: 'Install Bubuntu' },
     { id: 3, text: 'Train hard' },
   ],
   inProgress: [{ id: 4, text: 'Delete Shindows' }],
-  completed: [
+  done: [
     { id: 5, text: 'Lunch' },
     { id: 6, text: 'Relax' },
   ],

@@ -4,7 +4,7 @@
   .board-content {
     display: flex;
     width: 100%;
-    min-height: 264px;
+    min-height: 382px;
     margin-top: 8px;
     padding: 20px 10px;
     background-color: rgba(185, 185, 185, 0.44);
@@ -20,6 +20,25 @@
 
       > * + * {
         margin-top: 8px;
+      }
+    }
+
+    .card-placeholder {
+      display: none;
+      min-height: 50px;
+      padding: 16px;
+      line-height: 1;
+      text-align: center;
+      border: 1px solid rgba(227, 227, 227, 0.44);
+
+      // background-color: rgba(227, 227, 227, 0.44);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.1s linear;
+
+      &.highlight {
+        // background-color: rgba(255, 255, 255, 0.24);
+        display: block;
       }
     }
   }
