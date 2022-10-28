@@ -1,6 +1,6 @@
-import DoneIcon from '@Assets/icons/accepted.png'
-import ToDoListIcon from '@Assets/icons/check-list.png'
-import TimeIcon from '@Assets/icons/hourglass.png' // time
+import DoneIcon from '@Assets/svg/accepted.png'
+import ToDoListIcon from '@Assets/svg/check-list.png'
+import TimeIcon from '@Assets/svg/hourglass.png' // time
 
 export interface ICardItem {
   text: string
