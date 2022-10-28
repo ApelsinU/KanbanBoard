@@ -1,11 +1,13 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-.idea/workspace.xml
+.idea/*
 
 # dependencies
 /node_modules
 /.pnp
 .pnp.js
+client/node_modules
+
 
 # testing
 /coverage

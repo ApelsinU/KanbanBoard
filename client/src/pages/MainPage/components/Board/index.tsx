@@ -93,7 +93,7 @@ export const Board = () => {
 
   function getFormattedText(str: string) {
     let formattedText = ''
-    str.split('').map((el, index) => {
+    str.split('').map((el) => {
       if (el === el.toUpperCase()) {
         formattedText += ' '
       }

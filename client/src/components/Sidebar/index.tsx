@@ -5,9 +5,15 @@ import { KanbanIcon } from '@Assets/icons/KanbanIcon'
 import Logo from '@Assets/images/logo-black-short.png'
 import { NavLink, useLocation } from 'react-router-dom'
 
-export const Sidebar = () => {
+interface ISidebarProps {
+  isAuth: boolean
+}
+
+export const Sidebar = ({ isAuth }: ISidebarProps) => {
   const location = useLocation()
-  console.log('location', location)
+
+  if (!isAuth) return null
+
   return (
     <div className="sidebar-inner">
       <img className="logo" src={Logo} alt="Logo tick icon" />
