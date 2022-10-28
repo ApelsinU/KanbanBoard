@@ -12,7 +12,7 @@ import { AuthRoute } from './routes/AuthRoute'
 import { PrivateRoute } from './routes/PrivateRoute'
 
 function App() {
-  const isAuth: boolean = false
+  const isAuth: boolean = true
 
   return (
     <React.Suspense fallback={'loading...'}>
