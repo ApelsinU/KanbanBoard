@@ -1,0 +1,5 @@
+{
+  "port": 5000,
+  "mongoDB": "mongodb+srv://Vadim:ggtX0aZT6NcGZDeH@cluster0.ukr0zti.mongodb.net/?retryWrites=true&w=majority",
+  "jwtSecret": "apelsin95789"
+}
