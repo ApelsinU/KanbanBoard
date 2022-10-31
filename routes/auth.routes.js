@@ -1,4 +1,4 @@
-const bcrypt = require("bcryptjs");
+const bcrypt = require("bcrypt");
 const config = require("config");
 const { Router } = require("express");
 const { check, validationResult } = require("express-validator");
@@ -12,7 +12,7 @@ router.post(
   "/login",
   [
     check("email", "Enter valid email").normalizeEmail().isEmail(),
-    check("password", "Enter password").exist(),
+    check("password", "Enter password").exists,
   ],
   async (req, res) => {
     try {
