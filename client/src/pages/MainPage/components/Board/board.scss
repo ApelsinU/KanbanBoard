@@ -1,3 +1,5 @@
+@import "./src/styles/vars";
+
 .board {
   display: flex;
   gap: 16px;
@@ -16,7 +18,7 @@
     }
 
     &.highlight {
-      border-color: #8300ff;
+      border-color: $color-primary;
     }
   }
 

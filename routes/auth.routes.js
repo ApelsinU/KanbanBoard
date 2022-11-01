@@ -4,7 +4,7 @@ const { Router } = require("express");
 const { check, validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
 
-const User = require("../models/User");
+const User = require("../database/User");
 const router = Router;
 
 // api/auth/login

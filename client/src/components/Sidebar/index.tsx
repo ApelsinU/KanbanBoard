@@ -2,21 +2,15 @@ import './sidebar.scss'
 
 import { AccountIcon } from '@Assets/icons/AccountIcon'
 import { KanbanIcon } from '@Assets/icons/KanbanIcon'
-import Logo from '@Assets/images/logo-black-short.png'
+import logo from '@Assets/images/logo-black-short.png'
 import { NavLink, useLocation } from 'react-router-dom'
 
-interface ISidebarProps {
-  isAuth: boolean
-}
-
-export const Sidebar = ({ isAuth }: ISidebarProps) => {
+export const Sidebar = () => {
   const location = useLocation()
-
-  if (!isAuth) return null
 
   return (
     <div className="sidebar-inner">
-      <img className="logo" src={Logo} alt="Logo tick icon" />
+      <img className="logo" src={logo} alt="Logo tick icon" />
       <nav className="nav">
         <NavLink
           className={`nav-link ${location.pathname === '/account' && 'active'}`}
