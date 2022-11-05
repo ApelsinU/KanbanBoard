@@ -5,6 +5,11 @@ import { NavLink } from 'react-router-dom'
 import { Button } from '@App/components/Button'
 
 export const Login = () => {
+
+  const onLoginClick = () => {
+    localStorage.setItem('isAuth','true')
+  }
+
   return (
     <div className="login-container">
       <div className="login">
@@ -26,7 +31,7 @@ export const Login = () => {
             type="password"
             placeholder="Password"
           />
-          <Button type="submit" text="Login" />
+          <Button type='submit' text="Login" onClick={() => onLoginClick()} />
         </form>
 
         <div className="footer">
