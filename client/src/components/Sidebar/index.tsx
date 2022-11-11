@@ -5,6 +5,8 @@ import { KanbanIcon } from '@Assets/icons/KanbanIcon'
 import logo from '@Assets/images/logo-black-short.png'
 import { NavLink, useLocation } from 'react-router-dom'
 
+import { DropMenuLink } from '@App/components/DropMenuLink'
+
 export const Sidebar = () => {
   const location = useLocation()
 
@@ -21,6 +23,7 @@ export const Sidebar = () => {
           </div>
           <span>Account</span>
         </NavLink>
+        {/*<DropMenuLink />*/}
         <NavLink
           className={`nav-link ${location.pathname === '/kanban' && 'active'}`}
           to="/kanban"

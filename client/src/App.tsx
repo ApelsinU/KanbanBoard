@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
@@ -11,11 +11,13 @@ import { AuthRoute } from './routes/AuthRoute'
 import { PrivateRoute } from './routes/PrivateRoute'
 
 function App() {
-  const [isAuth, setIsAuth] = useState<boolean>(false)
+  // const [isAuth, setIsAuth] = useState<boolean>(false)
+  //
+  // useEffect(() => {
+  //   setIsAuth(localStorage.getItem('isAuth') === 'true')
+  // }, [isAuth])
 
-  useEffect(()=> {
-    setIsAuth(localStorage.getItem('isAuth') === 'true')
-  }, [isAuth])
+  const isAuth = true
 
   return (
     <React.Suspense fallback={'loading...'}>
@@ -28,7 +30,7 @@ function App() {
             </Route>
 
             <Route element={<PrivateRoute isAuth={isAuth} />}>
-              <Route path="/" element={<AccountPage setIsAuth={setIsAuth}/>} />
+              <Route path="/" element={<AccountPage />} />
               <Route path="/account" element={<AccountPage />} />
               <Route path="/kanban" element={<MainPage />} />
             </Route>
