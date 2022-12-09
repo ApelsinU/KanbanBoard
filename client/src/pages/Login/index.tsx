@@ -17,7 +17,7 @@ export const Login = () => {
           <img className="logo" src={logo} alt="" />
         </div>
 
-        <form className="form" action="">
+        <form className="form" >
           <input
             name="username"
             className="input"
@@ -31,7 +31,9 @@ export const Login = () => {
             type="password"
             placeholder="Password"
           />
-          <Button type='submit' text="Login" onClick={() => onLoginClick()} />
+          <Button type='submit' onClick={() => onLoginClick()}>
+            Login
+          </Button>
         </form>
 
         <div className="footer">

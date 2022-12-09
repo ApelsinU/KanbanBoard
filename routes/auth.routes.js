@@ -3,9 +3,11 @@ const config = require("config");
 const { Router } = require("express");
 const { check, validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
-
 const User = require("../database/User");
-const router = Router;
+
+const router = Router();
+module.exports = router
+
 
 // api/auth/login
 router.post(

@@ -11,13 +11,9 @@ import { AuthRoute } from './routes/AuthRoute'
 import { PrivateRoute } from './routes/PrivateRoute'
 
 function App() {
-  // const [isAuth, setIsAuth] = useState<boolean>(false)
-  //
-  // useEffect(() => {
-  //   setIsAuth(localStorage.getItem('isAuth') === 'true')
-  // }, [isAuth])
 
-  const isAuth = true
+
+  const isAuth = false
 
   return (
     <React.Suspense fallback={'loading...'}>
