@@ -37,7 +37,7 @@ export const Registration = () => {
           <img className="logo" src={logo} alt="" />
         </div>
 
-        <div className="form">
+        <form className="form">
           <input
             name="username"
             className="input"
@@ -73,7 +73,7 @@ export const Registration = () => {
           <Button onClick={onRegisterClick} disabled={isLoading}>
             Register
           </Button>
-        </div>
+        </form>
 
         <div className="footer">
           <span className="text">Already have account?</span>
