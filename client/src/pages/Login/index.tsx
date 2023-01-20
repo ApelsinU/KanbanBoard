@@ -1,13 +1,32 @@
 import './login.scss'
+import { useEffect, useState } from 'react'
+
 import logo from '@Assets/images/logo-black-short.png'
 import { NavLink } from 'react-router-dom'
 
 import { Button } from '@App/components/Button'
+import { login } from '@App/http/auth'
+import { ILoginDataRequest } from '@App/http/interfaces'
 
 export const Login = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [loginData, setLoginData] = useState<ILoginDataRequest>({
+    username: '',
+    password: '',
+  })
 
   const onLoginClick = () => {
-    localStorage.setItem('isAuth','true')
+    // e.preventDefault()
+    setIsLoading(true)
+    try {
+      login(loginData).then((res) => {
+        console.log('success', res)
+      })
+      setIsLoading(false)
+    } catch (e) {
+      console.log('error', e)
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -17,12 +36,15 @@ export const Login = () => {
           <img className="logo" src={logo} alt="" />
         </div>
 
-        <form className="form" >
+        <form className="form">
           <input
             name="username"
             className="input"
             type="text"
             placeholder="Username"
+            onChange={(e) =>
+              setLoginData({ ...loginData, username: e.target.value })
+            }
           />
 
           <input
@@ -30,10 +52,16 @@ export const Login = () => {
             className="input"
             type="password"
             placeholder="Password"
+            onChange={(e) =>
+              setLoginData({ ...loginData, password: e.target.value })
+            }
           />
-          <Button type='submit' onClick={() => onLoginClick()}>
-            Login
-          </Button>
+          {/*<button onClick={(e) => onLoginClick(e)}>ok</button>*/}
+          <Button
+            text="Login"
+            onClick={() => onLoginClick()}
+            isLoading={isLoading}
+          />
         </form>
 
         <div className="footer">

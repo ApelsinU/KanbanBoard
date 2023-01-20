@@ -13,7 +13,7 @@ module.exports = router
 router.post(
   "/login",
   [
-    check("email", "Enter valid email").normalizeEmail().isEmail(),
+    check("username", "Enter username").exists,
     check("password", "Enter password").exists,
   ],
   async (req, res) => {
@@ -58,8 +58,18 @@ router.post(
 router.post(
   "/register",
   [
+    check("username", "Enter username").exists,
     check("email", "Email is not valid").isEmail(),
     check("password", "Password must be at least 6 symbols").isLength({
+      min: 6,
+    }),
+    check("password", "Passwords doesn't match").equals(
+      router.body.confirm_password
+    ),
+    check(
+      "confirm_password",
+      "Password must be at least 6 symbols"
+    ).exists.isLength({
       min: 6,
     }),
   ],
