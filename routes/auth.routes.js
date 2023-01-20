@@ -6,15 +6,14 @@ const jwt = require("jsonwebtoken");
 const User = require("../database/User");
 
 const router = Router();
-module.exports = router
-
+module.exports = router;
 
 // api/auth/login
 router.post(
   "/login",
   [
-    check("username", "Enter username").exists,
-    check("password", "Enter password").exists,
+    check("username", "Enter username").exists(),
+    check("password", "Enter password").exists(),
   ],
   async (req, res) => {
     try {
@@ -58,20 +57,19 @@ router.post(
 router.post(
   "/register",
   [
-    check("username", "Enter username").exists,
-    check("email", "Email is not valid").isEmail(),
+    check("username", "Enter username").exists(),
+    check("email", "Email is not valid").isEmpty(),
     check("password", "Password must be at least 6 symbols").isLength({
       min: 6,
     }),
-    check("password", "Passwords doesn't match").equals(
-      router.body.confirm_password
-    ),
-    check(
-      "confirm_password",
-      "Password must be at least 6 symbols"
-    ).exists.isLength({
-      min: 6,
-    }),
+    // check("password", "Passwords doesn't match").equals(
+    //   router.body.confirm_password
+    // ),
+    check("confirm_password", "Password must be at least 6 symbols")
+      .exists()
+      .isLength({
+        min: 6,
+      }),
   ],
   async (req, res) => {
     try {

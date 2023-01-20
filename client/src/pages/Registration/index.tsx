@@ -1,10 +1,11 @@
 import './registration.scss'
+import { ChangeEvent, useState } from 'react'
+
 import logo from '@Assets/images/logo-black-short.png'
 import { NavLink } from 'react-router-dom'
 
 import { Button } from '@App/components/Button'
-import {useHttp} from "@App/hooks/http";
-import {ChangeEvent, useState} from "react";
+import { useHttp } from '@App/hooks/http'
 
 type RegisterFormData = {
   username: string
@@ -14,19 +15,19 @@ type RegisterFormData = {
 }
 
 export const Registration = () => {
-  const {request, isLoading, error} = useHttp()
+  const { request, isLoading, error } = useHttp()
 
   const [formData, setFormData] = useState<RegisterFormData | {}>({})
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setFormData({...formData, [e.target.name]: e.target.value})
+    setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
   const onRegisterClick = async () => {
     console.log('click')
     try {
-      const data = await request('api/auth/register', 'POST', {...formData})
-      console.log('data',data)
+      const data = await request('api/auth/register', 'POST', { ...formData })
+      console.log('data', data)
     } catch (e) {}
   }
 
@@ -70,9 +71,11 @@ export const Registration = () => {
             onChange={(e) => handleChange(e)}
           />
 
-          <Button onClick={onRegisterClick} disabled={isLoading}>
-            Register
-          </Button>
+          <Button
+            text={'Register'}
+            onClick={onRegisterClick}
+            isLoading={isLoading}
+          />
         </form>
 
         <div className="footer">

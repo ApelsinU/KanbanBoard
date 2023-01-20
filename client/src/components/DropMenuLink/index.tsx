@@ -43,9 +43,7 @@ export const DropMenuLink = ({ setIsAuth }: any) => {
           </div>
           <span>Account</span>
         </NavLink>
-        <Button onClick={() => onLogOutClick()}>
-          Log Out
-        </Button>
+        <Button onClick={() => onLogOutClick()} text={'Log Out'} />
       </div>
     </>
   )
