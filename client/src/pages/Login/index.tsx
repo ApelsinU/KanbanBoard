@@ -59,6 +59,7 @@ export const Login = () => {
           {/*<button onClick={(e) => onLoginClick(e)}>ok</button>*/}
           <Button
             text="Login"
+            height={45}
             onClick={() => onLoginClick()}
             isLoading={isLoading}
           />

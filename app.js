@@ -1,10 +1,13 @@
 const config = require("config");
 const express = require("express");
 const mongoose = require("mongoose");
+const authRoutes = require("./routes/auth-routes");
 
 const app = express();
 
-app.use("api/auth", require("./routes/auth.routes"));
+app.use(express.json({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
+app.use("/api/auth", authRoutes);
 
 const PORT = config.get("port") || 5000;
 const MONGO_DB = config.get("mongoDB");

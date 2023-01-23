@@ -23,12 +23,14 @@ export const Registration = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
-  const onRegisterClick = async () => {
-    console.log('click')
+  async function handleRegister(e: any) {
+    e.preventDefault()
     try {
-      const data = await request('api/auth/register', 'POST', { ...formData })
+      const data = await request('/api/auth/register', 'POST', formData)
       console.log('data', data)
-    } catch (e) {}
+    } catch (e) {
+      console.log('Error message from server: ', e)
+    }
   }
 
   return (
@@ -38,7 +40,7 @@ export const Registration = () => {
           <img className="logo" src={logo} alt="" />
         </div>
 
-        <form className="form">
+        <form className="form" onSubmit={handleRegister}>
           <input
             name="username"
             className="input"
@@ -63,17 +65,20 @@ export const Registration = () => {
             required
             onChange={(e) => handleChange(e)}
           />
-          <input
-            name="confirm_password"
-            className="input"
-            type="password"
-            placeholder="Confirm Password"
-            onChange={(e) => handleChange(e)}
-          />
+          {/*<input*/}
+          {/*  name="confirm_password"*/}
+          {/*  className="input"*/}
+          {/*  type="password"*/}
+          {/*  placeholder="Confirm Password"*/}
+          {/*  onChange={(e) => handleChange(e)}*/}
+          {/*/>*/}
 
           <Button
             text={'Register'}
-            onClick={onRegisterClick}
+            height={45}
+            // onClick={(e: React.FormEvent<HTMLInputElement>) =>
+            //   onRegisterClick(e)
+            // }
             isLoading={isLoading}
           />
         </form>

@@ -65,16 +65,18 @@ router.post(
     // check("password", "Passwords doesn't match").equals(
     //   router.body.confirm_password
     // ),
-    check("confirm_password", "Password must be at least 6 symbols")
-      .exists()
-      .isLength({
-        min: 6,
-      }),
+
+    // check("confirm_password", "Password must be at least 6 symbols")
+    //   .exists()
+    //   .isLength({
+    //     min: 6,
+    //   }),
   ],
   async (req, res) => {
+    console.log("body", req.body);
     try {
       const errors = validationResult(req);
-
+      //console.log("errors", errors);
       if (!errors.isEmpty()) {
         return res.status(400).json({
           errors: errors.array(),

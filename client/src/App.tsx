@@ -11,8 +11,6 @@ import { AuthRoute } from './routes/AuthRoute'
 import { PrivateRoute } from './routes/PrivateRoute'
 
 function App() {
-
-
   const isAuth = false
 
   return (

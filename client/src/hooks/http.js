@@ -1,30 +1,47 @@
-import {useState} from "react";
+import { useCallback, useState } from 'react'
 
 export const useHttp = () => {
-    const [isLoading, setIsLoading] = useState(false)
-    const [error, setError] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState(null)
 
-    const request = async (url, method = "GET", body = {}, headers = {}) => {
-        setIsLoading(true)
-        try {
-            const res = await fetch(url, {method, body, headers})
-            const data = res.json()
+  const request = useCallback(
+    async (url, method = 'GET', body = null, headers = {}) => {
+      setIsLoading(true)
 
-            if (!res.ok) {
-                throw new Error(data.message || 'Request Error')
-            }
-
-            setIsLoading(false)
-
-            return data
-        } catch(e) {
-            setIsLoading(false)
-            setError(e.message)
-            throw e
+      try {
+        if (body) {
+          body = JSON.stringify(body)
+          headers['Content-Type'] = 'application/json'
+          console.log('useHttp: body', body)
         }
-    }
 
-    const clearError = () => setError(null)
+        const res = await fetch(url, {
+          method,
+          headers,
+          body,
+          mode: 'no-cors',
+        })
+        console.log('res', res)
 
-    return {request, isLoading, error, clearError}
+        const data = await res.json()
+        console.log('data', data)
+
+        if (!res.ok) {
+          throw new Error(data.message || 'Request Error')
+        }
+
+        setIsLoading(false)
+
+        return data
+      } catch (e) {
+        setIsLoading(false)
+        setError(e.message)
+        throw e
+      }
+    },
+  )
+
+  const clearError = () => setError(null)
+
+  return { request, isLoading, error, clearError }
 }
