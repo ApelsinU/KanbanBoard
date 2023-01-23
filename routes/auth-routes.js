@@ -73,7 +73,6 @@ router.post(
     //   }),
   ],
   async (req, res) => {
-    console.log("body", req.body);
     try {
       const errors = validationResult(req);
       //console.log("errors", errors);

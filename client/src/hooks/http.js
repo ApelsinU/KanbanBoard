@@ -12,16 +12,13 @@ export const useHttp = () => {
         if (body) {
           body = JSON.stringify(body)
           headers['Content-Type'] = 'application/json'
-          console.log('useHttp: body', body)
         }
 
         const res = await fetch(url, {
           method,
           headers,
           body,
-          mode: 'no-cors',
         })
-        console.log('res', res)
 
         const data = await res.json()
         console.log('data', data)
