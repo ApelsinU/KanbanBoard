@@ -15,8 +15,7 @@ type RegisterFormData = {
 }
 
 export const Registration = () => {
-  const { request, isLoading, error } = useHttp()
-
+  const { request, isLoading } = useHttp()
   const [formData, setFormData] = useState<RegisterFormData | {}>({})
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {

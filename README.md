@@ -2,7 +2,8 @@ Client
 - React
 - TypeScript 
 - SCSS 
-- UseSWR, Axios (in process)
+- Fetch
+- Zustand State Manager (in progress)
 - 
 - Others: Craco, React Router v6, Eslint, Stylelint, Prettier, TS-Alias
 
@@ -15,6 +16,10 @@ Backend
 - Others: JWT
 
 ToDo
+Zustang:
+- Create Store
+- Set user auth info to Store
+
 Auth:
 - Registration +
 - Login +
