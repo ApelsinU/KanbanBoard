@@ -13,3 +13,9 @@ Backend
 - MongoDB
 - 
 - Others: JWT
+
+ToDo
+Auth:
+- Registration +
+- Login
+- Login/Logout Redirections
