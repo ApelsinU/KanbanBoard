@@ -17,5 +17,5 @@ Backend
 ToDo
 Auth:
 - Registration +
-- Login
+- Login +
 - Login/Logout Redirections

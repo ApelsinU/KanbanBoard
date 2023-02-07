@@ -1,5 +1,5 @@
 import './registration.scss'
-import { ChangeEvent, useState } from 'react'
+import {ChangeEvent, useEffect, useState} from 'react'
 
 import logo from '@Assets/images/logo-black-short.png'
 import { NavLink } from 'react-router-dom'
@@ -27,9 +27,9 @@ export const Registration = () => {
     e.preventDefault()
     try {
       const data = await request('/api/auth/register', 'POST', formData)
-      console.log('data', data)
+      console.log('Registration response: ', data)
     } catch (e) {
-      console.log('Error message from server: ', e)
+      console.log('Registration error: ', e)
     }
   }
 
@@ -45,7 +45,8 @@ export const Registration = () => {
             name="username"
             className="input"
             type="text"
-            placeholder="Username"
+            placeholder="Username *"
+            required
             onChange={(e) => handleChange(e)}
           />
           <input

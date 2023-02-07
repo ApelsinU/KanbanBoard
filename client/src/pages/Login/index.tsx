@@ -1,31 +1,35 @@
 import './login.scss'
-import { useEffect, useState } from 'react'
+import {ChangeEvent, useEffect, useState} from 'react'
 
 import logo from '@Assets/images/logo-black-short.png'
 import { NavLink } from 'react-router-dom'
 
 import { Button } from '@App/components/Button'
+import {useHttp} from "@App/hooks/http";
 import { login } from '@App/http/auth'
 import { ILoginDataRequest } from '@App/http/interfaces'
 
-export const Login = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [loginData, setLoginData] = useState<ILoginDataRequest>({
-    username: '',
-    password: '',
-  })
 
-  const onLoginClick = () => {
-    // e.preventDefault()
-    setIsLoading(true)
+type LoginFormData = {
+  username: string
+  password: string
+}
+
+export const Login = () => {
+  const { request, isLoading, error } = useHttp()
+  const [formData, setFormData] = useState<LoginFormData | {}>({})
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
+
+  async function handleLogin(e:any) {
+    e.preventDefault()
     try {
-      login(loginData).then((res) => {
-        console.log('success', res)
-      })
-      setIsLoading(false)
+      const data = await request('/api/auth/login', 'POST', formData)
+      console.log('Login response: ', data)
     } catch (e) {
-      console.log('error', e)
-      setIsLoading(false)
+      console.log('Login error: ', e)
     }
   }
 
@@ -36,15 +40,13 @@ export const Login = () => {
           <img className="logo" src={logo} alt="" />
         </div>
 
-        <form className="form">
+        <form className="form" onSubmit={handleLogin}>
           <input
             name="username"
             className="input"
             type="text"
             placeholder="Username"
-            onChange={(e) =>
-              setLoginData({ ...loginData, username: e.target.value })
-            }
+            onChange={(e) => handleChange(e)}
           />
 
           <input
@@ -52,15 +54,13 @@ export const Login = () => {
             className="input"
             type="password"
             placeholder="Password"
-            onChange={(e) =>
-              setLoginData({ ...loginData, password: e.target.value })
-            }
+            onChange={(e) => handleChange(e)}
           />
           {/*<button onClick={(e) => onLoginClick(e)}>ok</button>*/}
           <Button
             text="Login"
             height={45}
-            onClick={() => onLoginClick()}
+            //onClick={() => onLoginClick()}
             isLoading={isLoading}
           />
         </form>

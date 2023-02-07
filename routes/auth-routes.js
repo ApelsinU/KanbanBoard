@@ -26,9 +26,9 @@ router.post(
         });
       }
 
-      const { email, password } = req.body;
+      const { username, password } = req.body;
 
-      const user = await User.findOne({ email: email });
+      const user = await User.findOne({ username: username });
 
       if (!user) {
         return res.status(400).json({
@@ -36,7 +36,7 @@ router.post(
         });
       }
 
-      const isMatch = await bcrypt.compare(user.password, password);
+      const isMatch = await bcrypt.compare(password, user.password);
 
       if (!isMatch) {
         return res.status(400).json({ message: "Invalid password, try again" });
@@ -83,7 +83,7 @@ router.post(
         });
       }
 
-      const { email, password } = req.body;
+      const { username, email, password } = req.body;
 
       const isUser = await User.findOne({ email: email });
       if (isUser) {
@@ -94,7 +94,7 @@ router.post(
 
       const hashedPassword = await bcrypt.hash(password, 17);
 
-      const user = new User({ email: email, password: hashedPassword });
+      const user = new User({ username: username, email: email, password: hashedPassword });
 
       await user.save();
 
