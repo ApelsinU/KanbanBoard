@@ -15,12 +15,14 @@ Backend
 - 
 - Others: JWT
 
+
 ToDo
-Zustang:
+Zustand:
 - Create Store
-- Set user auth info to Store
+- Set user auth-info to Store
 
 Auth:
 - Registration +
 - Login +
-- Login/Logout Redirections
+- Login/Logout Redirections +
+- Listen when isAuth Store has been changed and trigger redirection
