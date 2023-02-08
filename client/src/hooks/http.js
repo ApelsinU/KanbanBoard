@@ -21,7 +21,6 @@ export const useHttp = () => {
         })
 
         const data = await res.json()
-        console.log('data', data)
 
         if (!res.ok) {
           throw new Error(data.message || 'Request Error')

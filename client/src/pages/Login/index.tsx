@@ -1,11 +1,13 @@
 import './login.scss'
-import {ChangeEvent, useState} from 'react'
+import { ChangeEvent, useState } from 'react'
 
 import logo from '@Assets/images/logo-black-short.png'
 import { NavLink } from 'react-router-dom'
 
 import { Button } from '@App/components/Button'
-import { useHttp } from "@App/hooks/http";
+import { useAuth } from '@App/hooks/auth'
+import { useHttp } from '@App/hooks/http'
+import { UserResponseData } from '@App/types/http'
 
 type LoginFormData = {
   username: string
@@ -14,19 +16,24 @@ type LoginFormData = {
 
 export const Login = () => {
   const { request, isLoading } = useHttp()
+  const { login } = useAuth()
   const [formData, setFormData] = useState<LoginFormData | {}>({})
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
-  async function handleLogin(e:any) {
+  async function handleLogin(e: any) {
     e.preventDefault()
     try {
-      const data = await request('/api/auth/login', 'POST', formData)
+      const data: UserResponseData = await request(
+        '/api/auth/login',
+        'POST',
+        formData,
+      )
 
-      if (data && data.token) {
-        window.localStorage.setItem("jwt-token", data.token)
+      if (data) {
+        login(data)
       }
     } catch (e) {
       console.log('Login error: ', e)

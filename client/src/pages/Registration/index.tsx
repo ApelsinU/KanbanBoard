@@ -1,5 +1,5 @@
 import './registration.scss'
-import {ChangeEvent, useEffect, useState} from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 
 import logo from '@Assets/images/logo-black-short.png'
 import { NavLink } from 'react-router-dom'
