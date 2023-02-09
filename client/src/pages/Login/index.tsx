@@ -25,16 +25,11 @@ export const Login = () => {
 
   async function handleLogin(e: any) {
     e.preventDefault()
-    try {
-      const data: UserResponseData = await request(
-        '/api/auth/login',
-        'POST',
-        formData,
-      )
 
-      if (data) {
-        login(data)
-      }
+    try {
+      await request('/api/auth/login', 'POST', formData).then(
+        (data: UserResponseData) => login(data),
+      )
     } catch (e) {
       console.log('Login error: ', e)
     }
@@ -63,13 +58,7 @@ export const Login = () => {
             placeholder="Password"
             onChange={(e) => handleChange(e)}
           />
-          {/*<button onClick={(e) => onLoginClick(e)}>ok</button>*/}
-          <Button
-            text="Login"
-            height={45}
-            //onClick={() => onLoginClick()}
-            isLoading={isLoading}
-          />
+          <Button text="Login" height={45} isLoading={isLoading} />
         </form>
 
         <div className="footer">

@@ -1,27 +1,24 @@
 import { useEffect, useState } from 'react'
 
 import { UserResponseData } from '@App/types/http'
+import { useUserStore } from '@App/zustand/stores/userStore'
 
 export const useAuth = () => {
   const [isAuth, setIsAuth] = useState<boolean>(false)
+  const userData = useUserStore((state) => state.userData)
+  const refreshUserData = useUserStore((state) => state.refreshUserData)
 
   function login(data: UserResponseData) {
-    // todo: add to persist store
-    window.localStorage.setItem(
-      'user-auth',
-      JSON.stringify({ id: data.userId, token: data.token }),
-    )
+    refreshUserData({ userId: data.userId, token: data.token })
   }
 
   function logout() {
-    // todo: rm from persist store
-    window.localStorage.setItem('user-auth', '')
+    refreshUserData({ userId: '', token: '' })
   }
 
   useEffect(() => {
-    const localStorage = window.localStorage.getItem('user-auth')
-    setIsAuth(!!localStorage)
-  }, [login, logout])
+    setIsAuth(!!(userData.userId && userData.token))
+  }, [userData])
 
   return {
     login,

@@ -6,6 +6,7 @@ import { useAuth } from '@App/hooks/auth'
 
 export const AccountPage = () => {
   const { logout } = useAuth()
+
   return (
     <div className="container">
       <Sidebar />
