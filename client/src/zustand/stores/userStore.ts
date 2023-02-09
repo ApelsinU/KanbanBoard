@@ -22,6 +22,7 @@ export const useUserStore = create<UserStore>()(
       refreshUserData: ({ userId, token }) =>
         set(() => ({ userData: { userId, token } })),
     })),
+
     { name: 'userData', version: 1 },
   ),
 )
