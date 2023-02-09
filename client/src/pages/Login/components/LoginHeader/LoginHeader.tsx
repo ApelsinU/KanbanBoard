@@ -1,5 +1,4 @@
 import './login-header.scss'
-
 import logo from '@Assets/images/logo-black-short.png'
 
 export const LoginHeader = () => {
