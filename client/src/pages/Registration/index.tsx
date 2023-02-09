@@ -4,8 +4,8 @@ import { ChangeEvent, useEffect, useState } from 'react'
 import logo from '@Assets/images/logo-black-short.png'
 import { NavLink } from 'react-router-dom'
 
-import { Button } from '@App/components/Button'
 import { useHttp } from '@App/hooks/http'
+import { Button } from '@App/ui/Button'
 
 type RegisterFormData = {
   username: string

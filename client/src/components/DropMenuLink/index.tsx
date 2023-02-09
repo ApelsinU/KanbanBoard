@@ -4,7 +4,7 @@ import React from 'react'
 import { AccountIcon } from '@Assets/icons/AccountIcon'
 import { NavLink, useLocation } from 'react-router-dom'
 
-import { Button } from '@App/components/Button'
+import { Button } from '@App/ui/Button'
 
 export const DropMenuLink = ({ setIsAuth }: any) => {
   const location = useLocation()

@@ -1,5 +1,5 @@
 import './button.scss'
-import { ChangeEvent, ReactNode } from 'react'
+import { Loader } from '@App/ui/Loader/Loader'
 
 export interface IButtonProps {
   type?: 'button' | 'submit' | 'reset' | undefined
@@ -24,7 +24,14 @@ export const Button = ({
       disabled={isLoading}
       style={{ height: `${height}px` }}
     >
-      {isLoading ? <>Loading</> : <>{text}</>}
+      {isLoading ? (
+        <>
+          {text}
+          <Loader color="white" size={2} />
+        </>
+      ) : (
+        <>{text}</>
+      )}
     </button>
   )
 }

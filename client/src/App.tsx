@@ -7,6 +7,7 @@ import { AccountPage } from '@App/pages/AccountPage'
 import { Login } from '@App/pages/Login'
 import { MainPage } from '@App/pages/MainPage'
 import { Registration } from '@App/pages/Registration'
+import { Loader } from '@App/ui/Loader/Loader'
 
 import { AuthRoute } from './routes/AuthRoute'
 import { PrivateRoute } from './routes/PrivateRoute'
@@ -15,7 +16,7 @@ function App() {
   const { isAuth } = useAuth()
 
   return (
-    <React.Suspense fallback={'loading...'}>
+    <React.Suspense fallback={<Loader />}>
       <div className="page">
         <Router>
           <Routes>
