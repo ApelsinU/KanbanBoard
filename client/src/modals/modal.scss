@@ -23,16 +23,22 @@
 
   .modal-header {
     display: flex;
+    align-items: center;
     justify-content: space-between;
+    min-width: 400px;
     margin-bottom: 20px;
     column-gap: 20px;
   }
 
-  .modal-close-container {
-    > * {
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-    }
+  .modal-title {
+    border-bottom: 3px solid #333;
   }
+
+  //.modal-close-container {
+  //  > * {
+  //    width: 20px;
+  //    height: 20px;
+  //    border-radius: 50%;
+  //  }
+  //}
 }

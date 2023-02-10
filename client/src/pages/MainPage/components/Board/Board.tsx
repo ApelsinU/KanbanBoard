@@ -170,6 +170,7 @@ export const Board = () => {
       <CreateTodoModal
         isOpen={isCreateModalOpen}
         onClose={() => setIsCreateModalOpen(false)}
+        title="Create new Task"
       />
     </div>
   )
