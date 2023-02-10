@@ -1,10 +1,13 @@
 import './button.scss'
+import React from 'react'
+
 import { Loader } from '@App/ui/Loader/Loader'
 
 export interface IButtonProps {
   type?: 'button' | 'submit' | 'reset' | undefined
   text: string
-  onClick?: void | (() => void) | ((e: any) => Promise<void>)
+  onClick?: React.MouseEventHandler<HTMLButtonElement>
+  //  onClick?: void | (() => void) | ((e: any) => Promise<void>)
   isLoading?: boolean
   height?: number
 }
@@ -20,7 +23,7 @@ export const Button = ({
     <button
       className="button"
       type={type}
-      onClick={() => onClick}
+      onClick={onClick}
       disabled={isLoading}
       style={{ height: `${height}px` }}
     >

@@ -10,8 +10,9 @@ body {
 }
 
 .page {
+  display: flex;
   min-height: 100vh;
-  padding-top: 60px;
+  padding: 60px 0;
   background-color: #f2f2f2;
 }
 
