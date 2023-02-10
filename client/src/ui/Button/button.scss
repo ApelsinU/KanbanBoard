@@ -21,4 +21,13 @@
     opacity: 0.7;
     pointer-events: none;
   }
+
+  &.theme-circle {
+    width: 35px;
+    height: 35px;
+    color: #000;
+    background: #fff;
+    border: 1px solid #000;
+    border-radius: 50%;
+  }
 }

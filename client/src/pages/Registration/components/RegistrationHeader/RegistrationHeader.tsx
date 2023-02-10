@@ -4,7 +4,7 @@ import logo from '@Assets/images/logo-black-short.png'
 
 export const RegistrationHeader = () => {
   return (
-    <div className="header">
+    <div className="registartion-header">
       <img className="logo" src={logo} alt="" />
     </div>
   )

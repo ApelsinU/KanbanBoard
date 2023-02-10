@@ -32,7 +32,7 @@ export const LoginForm = () => {
     }
   }
   return (
-    <form className="form" onSubmit={handleLogin}>
+    <form className="login-form" onSubmit={handleLogin}>
       <input
         name="username"
         className="input"

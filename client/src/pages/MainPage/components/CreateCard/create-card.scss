@@ -1,0 +1,21 @@
+.create-card {
+  flex-grow: 1;
+  min-height: 50px;
+  padding: 16px;
+  color: #818181;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 1.2;
+  border: 1px dashed #d9d9d9;
+
+  //background-color: #fafafa;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.1s linear;
+
+  &:hover {
+    //background-color: #fafafa;
+    color: #5b5b5b;
+    border-color: #a1a1a1;
+  }
+}

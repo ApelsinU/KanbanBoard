@@ -29,7 +29,7 @@ export const RegistrationForm = () => {
     }
   }
   return (
-    <form className="form" onSubmit={handleRegister}>
+    <form className="registration-form" onSubmit={handleRegister}>
       <input
         name="username"
         className="input"

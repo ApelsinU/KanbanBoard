@@ -1,15 +1,6 @@
 import './card.scss'
 
-import { IMoveCardsParams, ISelectedCard } from '../Board/Board'
-import { ICardItem, IDataCards } from '../Board/DataCards'
-
-interface ICardProps {
-  item: ICardItem
-  moveCardsParams: IMoveCardsParams
-  setMoveCardsParams: (moveCardParams: IMoveCardsParams) => void
-  setSelectedCard: (moveCardParams: ISelectedCard) => void
-  initCol: keyof IDataCards
-}
+import { ICardProps } from '@App/pages/MainPage/components/Card/types'
 
 export const Card = ({
   item,

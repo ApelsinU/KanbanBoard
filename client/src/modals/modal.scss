@@ -1,0 +1,38 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  backdrop-filter: blur(3px);
+
+  &.open {
+    display: flex;
+  }
+
+  .modal-container {
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 8px 8px #efefef;
+  }
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    column-gap: 20px;
+  }
+
+  .modal-close-container {
+    > * {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+    }
+  }
+}

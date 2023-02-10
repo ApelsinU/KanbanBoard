@@ -1,15 +1,16 @@
-import './button.scss'
 import React from 'react'
+import './button.scss'
 
 import { Loader } from '@App/ui/Loader/Loader'
 
 export interface IButtonProps {
   type?: 'button' | 'submit' | 'reset' | undefined
-  text: string
+  text: string | Element
   onClick?: React.MouseEventHandler<HTMLButtonElement>
   //  onClick?: void | (() => void) | ((e: any) => Promise<void>)
   isLoading?: boolean
   height?: number
+  theme?: string
 }
 
 export const Button = ({
@@ -18,10 +19,11 @@ export const Button = ({
   onClick,
   isLoading,
   height,
+  theme,
 }: IButtonProps) => {
   return (
     <button
-      className="button"
+      className={`button theme-${theme}`}
       type={type}
       onClick={onClick}
       disabled={isLoading}

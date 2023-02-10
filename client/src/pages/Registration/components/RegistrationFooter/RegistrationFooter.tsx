@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 
 export const RegistrationFooter = () => {
   return (
-    <div className="footer">
+    <div className="registration-footer">
       <span className="text">Already have account?</span>
       <NavLink className="link" to="/login">
         Login

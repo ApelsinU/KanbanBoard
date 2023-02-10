@@ -1,17 +1,9 @@
 import { create } from 'zustand'
 import { devtools, persist } from 'zustand/middleware'
 
-type UserStore = {
-  userData: UserData
-  refreshUserData: ({ userId, token }: UserData) => void
-}
+import { IUserStore } from '@App/zustand/types/userTypes'
 
-type UserData = {
-  userId: string
-  token: string
-}
-
-export const useUserStore = create<UserStore>()(
+export const useUserStore = create<IUserStore>()(
   persist(
     devtools((set) => ({
       userData: {

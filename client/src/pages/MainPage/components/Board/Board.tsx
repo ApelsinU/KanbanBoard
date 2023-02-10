@@ -1,28 +1,36 @@
-import React, { DragEvent, useEffect, useRef, useState } from 'react'
-
+import React, {
+  DragEvent,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState,
+} from 'react'
 import './board.scss'
+
+import DoneIcon from '@Assets/images/accepted.png'
+import ToDoListIcon from '@Assets/images/check-list.png'
+import TimeIcon from '@Assets/images/hourglass.png'
+
+import { CreateTodoModal } from '@App/modals/CreateTodoModal/CreateTodoModal'
 import {
-  CardsIcons,
-  DataCards,
-  ICardItem,
-  IDataCards,
-} from '@App/pages/MainPage/components/Board/DataCards'
+  IMoveCardsParams,
+  ISelectedCard,
+} from '@App/pages/MainPage/components/Board/types'
+import { useTodosStore } from '@App/zustand/stores/todosStore'
+import { ICardItem, IDataCards } from '@App/zustand/types/todosTypes'
 
 import { Card } from '../Card/Card'
-
-export interface IMoveCardsParams {
-  cardId: number
-  targetCol: keyof IDataCards | 'noStatus'
-  cardText: string
-}
-
-export interface ISelectedCard {
-  cardId: number
-  cardText: string
-  initCol: keyof IDataCards
-}
+import { CreateCard } from '../CreateCard/CreateCard'
 
 export const Board = () => {
+  const todos = useTodosStore((state) => state.todos)
+
+  const CardsIcons = {
+    toDo: ToDoListIcon,
+    inProgress: TimeIcon,
+    done: DoneIcon,
+  }
+
   const [dataCards, setDataCards] = useState<IDataCards | null>(null)
   const [moveCardsParams, setMoveCardsParams] = useState<IMoveCardsParams>({
     cardId: 0,
@@ -30,9 +38,11 @@ export const Board = () => {
     cardText: '',
   })
   const [selectedCard, setSelectedCard] = useState<ISelectedCard | null>(null)
+  const [isCreateModalOpen, setIsCreateModalOpen] =
+    useState<SetStateAction<boolean>>(false)
 
   useEffect(() => {
-    setDataCards(DataCards)
+    setDataCards(todos)
   }, [])
 
   const dragOverCol = useRef<IMoveCardsParams['targetCol']>()
@@ -150,9 +160,17 @@ export const Board = () => {
               >
                 {selectedCard?.cardText}
               </div>
+
+              {cardKey === 'toDo' && (
+                <CreateCard setIsCreateModalOpen={setIsCreateModalOpen} />
+              )}
             </div>
           ),
         )}
+      <CreateTodoModal
+        isOpen={isCreateModalOpen}
+        onClose={() => setIsCreateModalOpen(false)}
+      />
     </div>
   )
 }

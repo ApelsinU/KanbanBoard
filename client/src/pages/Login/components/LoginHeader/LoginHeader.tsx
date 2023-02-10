@@ -4,7 +4,7 @@ import logo from '@Assets/images/logo-black-short.png'
 
 export const LoginHeader = () => {
   return (
-    <div className="header">
+    <div className="login-header">
       <img className="logo" src={logo} alt="" />
     </div>
   )
