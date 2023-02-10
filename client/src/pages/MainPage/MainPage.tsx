@@ -1,9 +1,9 @@
 import React from 'react'
 
 import './main-page.scss'
-import { Sidebar } from '@App/components/Sidebar'
+import { Sidebar } from '@App/components/Sidebar/Sidebar'
 
-import { Board } from './components/Board'
+import { Board } from './components/Board/Board'
 
 export const MainPage = () => {
   return (

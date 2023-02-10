@@ -8,7 +8,7 @@ import {
   IDataCards,
 } from '@App/pages/MainPage/components/Board/DataCards'
 
-import { Card } from '../Card'
+import { Card } from '../Card/Card'
 
 export interface IMoveCardsParams {
   cardId: number

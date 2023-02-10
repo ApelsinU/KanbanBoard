@@ -1,6 +1,6 @@
 import './card.scss'
 
-import { IMoveCardsParams, ISelectedCard } from '../Board'
+import { IMoveCardsParams, ISelectedCard } from '../Board/Board'
 import { ICardItem, IDataCards } from '../Board/DataCards'
 
 interface ICardProps {

@@ -4,7 +4,7 @@ import './login-form.scss'
 import { useAuth } from '@App/hooks/auth'
 import { useHttp } from '@App/hooks/http'
 import { UserResponseData } from '@App/types/http'
-import { Button } from '@App/ui/Button'
+import { Button } from '@App/ui/Button/Button'
 
 type LoginFormData = {
   username: string

@@ -1,7 +1,7 @@
 import './account.scss'
 import React from 'react'
 
-import { Sidebar } from '@App/components/Sidebar'
+import { Sidebar } from '@App/components/Sidebar/Sidebar'
 import { useAuth } from '@App/hooks/auth'
 
 export const AccountPage = () => {
