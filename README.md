@@ -1,28 +1,30 @@
-Client
+## Client
 - React
 - TypeScript 
 - SCSS 
-- Fetch
-- Zustand State Manager (in progress)
+- Fetch, Custom hook for Http
+- Zustand State Manager
 - 
-- Others: Craco, React Router v6, Eslint, Stylelint, Prettier, TS-Alias
+- Others: Craco, React RouterContainer v6, Eslint, Stylelint, Prettier, TS-Alias
 
 
-Backend
+## Backend
 - Node.js
 - Express
 - MongoDB
 - 
-- Others: JWT
+- Others: JWT, bcrypt
 
 
-ToDo
-Zustand:
-- Create Store
-- Set user auth-info to Store
+## ToDo
+### Auth
+- Add Confirm password field to registration
+- Add notifications and errors to frontend
 
-Auth:
-- Registration +
-- Login +
-- Login/Logout Redirections +
-- Listen when isAuth Store has been changed and trigger redirection
+### Kanban
+- Add ability to Create, Delete, Edit cards
+- Add ability to Change position of the cards
+
+### Mongo-DB
+- Connect cards list to Mongo
+- Add refresh request to Mongo on each card changing

@@ -9,7 +9,7 @@ interface IAuthRouteProps {
 export const AuthRoute = ({ isAuth }: IAuthRouteProps) => {
   return (
     <React.Suspense fallback={'loading...'}>
-      {!isAuth ? <Outlet /> : <Navigate to="/" />}
+      {!isAuth ? <Outlet /> : <Navigate to="/account" />}
     </React.Suspense>
   )
 }
