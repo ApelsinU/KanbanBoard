@@ -1,10 +1,4 @@
-import React, {
-  DragEvent,
-  SetStateAction,
-  useEffect,
-  useRef,
-  useState,
-} from 'react'
+import React, { DragEvent, SetStateAction, useEffect, useRef, useState } from 'react'
 import './board.scss'
 
 import DoneIcon from '@Assets/images/accepted.png'
@@ -12,10 +6,7 @@ import ToDoListIcon from '@Assets/images/check-list.png'
 import TimeIcon from '@Assets/images/hourglass.png'
 
 import { CreateTodoModal } from '@App/modals/CreateTodoModal/CreateTodoModal'
-import {
-  IMoveCardsParams,
-  ISelectedCard,
-} from '@App/pages/MainPage/components/Board/types'
+import { IMoveCardsParams, ISelectedCard } from '@App/pages/MainPage/components/Board/types'
 import { useTodosStore } from '@App/zustand/stores/todosStore'
 import { ICardItem, IDataCards } from '@App/zustand/types/todosTypes'
 
@@ -26,8 +17,8 @@ export const Board = () => {
   const todos = useTodosStore((state) => state.todos)
 
   const CardsIcons = {
-    toDo: ToDoListIcon,
-    inProgress: TimeIcon,
+    todo: ToDoListIcon,
+    progress: TimeIcon,
     done: DoneIcon,
   }
 
@@ -38,12 +29,11 @@ export const Board = () => {
     cardText: '',
   })
   const [selectedCard, setSelectedCard] = useState<ISelectedCard | null>(null)
-  const [isCreateModalOpen, setIsCreateModalOpen] =
-    useState<SetStateAction<boolean>>(false)
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState<SetStateAction<boolean>>(false)
 
   useEffect(() => {
     setDataCards(todos)
-  }, [])
+  }, [todos])
 
   const dragOverCol = useRef<IMoveCardsParams['targetCol']>()
 
@@ -63,9 +53,7 @@ export const Board = () => {
       const targetType = moveCardsParams.targetCol
       let sourceCol: ICardItem[] = []
       const targetCol: ICardItem[] =
-        moveCardsParams.targetCol !== 'noStatus'
-          ? dataCards[moveCardsParams.targetCol]
-          : []
+        moveCardsParams.targetCol !== 'noStatus' ? dataCards[moveCardsParams.targetCol] : []
 
       Object.entries(dataCards).map((cards: any) =>
         cards[1].map((card: ICardItem) => {
@@ -116,57 +104,53 @@ export const Board = () => {
   return (
     <div className="board">
       {dataCards &&
-        (Object.keys(dataCards) as (keyof IDataCards)[]).map(
-          (cardKey: keyof IDataCards) => (
+        (Object.keys(dataCards) as (keyof IDataCards)[]).map((cardKey: keyof IDataCards) => (
+          <div
+            key={cardKey}
+            className={`col ${
+              moveCardsParams.targetCol === cardKey &&
+              moveCardsParams.targetCol !== selectedCard?.initCol &&
+              'highlight'
+            }`}
+            onDragOver={(e) => dragOver(e, cardKey)}
+          >
+            <div className="header">
+              <div className="header-icon">
+                <img src={CardsIcons[cardKey]} alt="" />
+              </div>
+              <div className="header-text">
+                <span>
+                  {getFormattedText(cardKey)}
+                  <div className="header-count">
+                    <span>{dataCards[cardKey].length}</span>
+                  </div>
+                </span>
+              </div>
+            </div>
+
+            {dataCards[cardKey].map((card: ICardItem, index) => (
+              <Card
+                key={index}
+                item={card}
+                initCol={cardKey}
+                moveCardsParams={moveCardsParams}
+                setSelectedCard={setSelectedCard}
+                setMoveCardsParams={setMoveCardsParams}
+              />
+            ))}
             <div
-              key={cardKey}
-              className={`col ${
+              className={`card-placeholder ${
                 moveCardsParams.targetCol === cardKey &&
                 moveCardsParams.targetCol !== selectedCard?.initCol &&
                 'highlight'
               }`}
-              onDragOver={(e) => dragOver(e, cardKey)}
             >
-              <div className="header">
-                <div className="header-icon">
-                  <img src={CardsIcons[cardKey]} alt="" />
-                </div>
-                <div className="header-text">
-                  <span>
-                    {getFormattedText(cardKey)}
-                    <div className="header-count">
-                      <span>{dataCards[cardKey].length}</span>
-                    </div>
-                  </span>
-                </div>
-              </div>
-
-              {dataCards[cardKey].map((card: ICardItem, index) => (
-                <Card
-                  key={index}
-                  item={card}
-                  initCol={cardKey}
-                  moveCardsParams={moveCardsParams}
-                  setSelectedCard={setSelectedCard}
-                  setMoveCardsParams={setMoveCardsParams}
-                />
-              ))}
-              <div
-                className={`card-placeholder ${
-                  moveCardsParams.targetCol === cardKey &&
-                  moveCardsParams.targetCol !== selectedCard?.initCol &&
-                  'highlight'
-                }`}
-              >
-                {selectedCard?.cardText}
-              </div>
-
-              {cardKey === 'toDo' && (
-                <CreateCard setIsCreateModalOpen={setIsCreateModalOpen} />
-              )}
+              {selectedCard?.cardText}
             </div>
-          ),
-        )}
+
+            {cardKey === 'todo' && <CreateCard setIsCreateModalOpen={setIsCreateModalOpen} />}
+          </div>
+        ))}
       <CreateTodoModal
         isOpen={isCreateModalOpen}
         onClose={() => setIsCreateModalOpen(false)}

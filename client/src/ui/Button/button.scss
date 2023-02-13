@@ -21,19 +21,4 @@
     opacity: 0.7;
     pointer-events: none;
   }
-
-  &.theme-circle {
-    width: 40px;
-    height: 40px;
-    color: #000;
-    font-size: 14px;
-    background: #fff;
-    border: 1px solid #000;
-    border-radius: 50%;
-
-    &:hover {
-      color: #fff;
-      background: #000;
-    }
-  }
 }

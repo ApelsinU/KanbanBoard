@@ -4,16 +4,21 @@ import { ChangeEvent, useState } from 'react'
 
 import { useHttp } from '@App/hooks/http'
 import { Button } from '@App/ui/Button/Button'
+import { Input } from '@App/ui/Input/Input'
 
 type RegisterFormData = {
   username: string
   email: string
   password: string
-  confirm_password: string
+  // confirm_password: string
 }
 export const RegistrationForm = () => {
   const { request, isLoading } = useHttp()
-  const [formData, setFormData] = useState<RegisterFormData | {}>({})
+  const [formData, setFormData] = useState<RegisterFormData>({
+    username: '',
+    email: '',
+    password: '',
+  })
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -30,47 +35,40 @@ export const RegistrationForm = () => {
   }
   return (
     <form className="registration-form" onSubmit={handleRegister}>
-      <input
+      <Input
         name="username"
-        className="input"
         type="text"
         placeholder="Username *"
-        required
-        onChange={(e) => handleChange(e)}
+        required={true}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
+        value={formData.username}
       />
-      <input
+      <Input
         name="email"
-        className="input"
         type="email"
         placeholder="Email *"
-        required
-        onChange={(e) => handleChange(e)}
+        required={true}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
+        value={formData.email}
       />
-
-      <input
+      <Input
         name="password"
-        className="input"
         type="password"
         placeholder="Password *"
-        required
-        onChange={(e) => handleChange(e)}
+        required={true}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
+        value={formData.password}
       />
-      {/*<input*/}
-      {/*  name="confirm_password"*/}
-      {/*  className="input"*/}
-      {/*  type="password"*/}
-      {/*  placeholder="Confirm Password"*/}
-      {/*  onChange={(e) => handleChange(e)}*/}
-      {/*/>*/}
 
-      <Button
-        text={'Register'}
-        height={45}
-        // onClick={(e: React.FormEvent<HTMLInputElement>) =>
-        //   onRegisterClick(e)
-        // }
-        isLoading={isLoading}
-      />
+      {/*<Input
+        name="confirm_password"
+        type="password"
+        placeholder="Confirm Password *"
+        required
+        onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
+      />*/}
+
+      <Button text={'Register'} height={45} isLoading={isLoading} />
     </form>
   )
 }

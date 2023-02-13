@@ -5,6 +5,7 @@ import { useAuth } from '@App/hooks/auth'
 import { useHttp } from '@App/hooks/http'
 import { UserResponseData } from '@App/types/http'
 import { Button } from '@App/ui/Button/Button'
+import { Input } from '@App/ui/Input/Input'
 
 type LoginFormData = {
   username: string
@@ -13,7 +14,7 @@ type LoginFormData = {
 
 export const LoginForm = () => {
   const { login } = useAuth()
-  const [formData, setFormData] = useState<LoginFormData | {}>({})
+  const [formData, setFormData] = useState<LoginFormData>({ username: '', password: '' })
   const { request, isLoading } = useHttp()
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -24,30 +25,32 @@ export const LoginForm = () => {
     e.preventDefault()
 
     try {
-      await request('/api/auth/login', 'POST', formData).then(
-        (data: UserResponseData) => login(data),
+      await request('/api/auth/login', 'POST', formData).then((data: UserResponseData) =>
+        login(data),
       )
     } catch (e) {
       console.log('Login error: ', e)
     }
   }
+
   return (
     <form className="login-form" onSubmit={handleLogin}>
-      <input
+      <Input
         name="username"
-        className="input"
         type="text"
         placeholder="Username"
-        onChange={(e) => handleChange(e)}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
+        value={formData.username}
       />
 
-      <input
+      <Input
         name="password"
-        className="input"
         type="password"
         placeholder="Password"
-        onChange={(e) => handleChange(e)}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
+        value={formData.password}
       />
+
       <Button text="Login" height={45} isLoading={isLoading} />
     </form>
   )

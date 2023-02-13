@@ -1,8 +1,7 @@
 import { MouseEventHandler, SetStateAction, useEffect } from 'react'
 
 import './modal.scss'
-import crossIcon from '@App/assets/images/cross.png'
-import { Button } from '@App/ui/Button/Button'
+import { CloseButton } from '@App/ui/CloseButton/CloseButton'
 
 interface IModal {
   children: JSX.Element
@@ -21,12 +20,7 @@ export const Modal = ({ children, isOpen, onClose, title }: IModal) => {
       <div className={'modal-container'}>
         <div className={'modal-header'}>
           <h2 className={'modal-title'}>{title}</h2>
-          <Button
-            onClick={onClose}
-            theme="circle"
-            text="close"
-            // text={<img src={crossIcon} alt="cross-icon" />}
-          />
+          <CloseButton onClick={onClose} />
         </div>
         {children}
       </div>

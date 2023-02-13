@@ -5,12 +5,13 @@ import { Loader } from '@App/ui/Loader/Loader'
 
 export interface IButtonProps {
   type?: 'button' | 'submit' | 'reset' | undefined
-  text: string | Element
+  text: string
   onClick?: React.MouseEventHandler<HTMLButtonElement>
   //  onClick?: void | (() => void) | ((e: any) => Promise<void>)
   isLoading?: boolean
   height?: number
-  theme?: string
+  theme?: ''
+  disable?: boolean
 }
 
 export const Button = ({
@@ -20,13 +21,14 @@ export const Button = ({
   isLoading,
   height,
   theme,
+  disable = false,
 }: IButtonProps) => {
   return (
     <button
       className={`button theme-${theme}`}
       type={type}
       onClick={onClick}
-      disabled={isLoading}
+      disabled={isLoading ? isLoading : disable}
       style={{ height: `${height}px` }}
     >
       {isLoading ? (
