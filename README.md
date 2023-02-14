@@ -22,8 +22,7 @@
 - Add notifications and errors to frontend
 
 ### Kanban
-- Add ability to Create, Delete, Edit cards
-- Add ability to Change position of the cards
+- Add ability to Change position of the cards (between cols and in one col)
 
 ### Mongo-DB
 - Connect cards list to Mongo
