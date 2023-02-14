@@ -28,3 +28,6 @@
 ### Mongo-DB
 - Connect cards list to Mongo
 - Add refresh request to Mongo on each card changing
+
+## Links
+- icons - https://www.svgrepo.com/collection/kalai-oval-interface-icons/10

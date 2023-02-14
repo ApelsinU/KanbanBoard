@@ -6,9 +6,10 @@ import ToDoListIcon from '@Assets/images/check-list.png'
 import TimeIcon from '@Assets/images/hourglass.png'
 
 import { CreateTodoModal } from '@App/modals/CreateTodoModal/CreateTodoModal'
+import { EditTodoModal } from '@App/modals/EditTodoModal/EditTodoModal'
 import { IMoveCardsParams, ISelectedCard } from '@App/pages/MainPage/components/Board/types'
 import { useTodosStore } from '@App/zustand/stores/todosStore'
-import { ICardItem, IDataCards } from '@App/zustand/types/todosTypes'
+import { ICardItem, IDataCards, IEditTodo } from '@App/zustand/types/todosTypes'
 
 import { Card } from '../Card/Card'
 import { CreateCard } from '../CreateCard/CreateCard'
@@ -30,6 +31,7 @@ export const Board = () => {
   })
   const [selectedCard, setSelectedCard] = useState<ISelectedCard | null>(null)
   const [isCreateModalOpen, setIsCreateModalOpen] = useState<SetStateAction<boolean>>(false)
+  const [editModalInfo, setEditModalInfo] = useState<IEditTodo | null>(null)
 
   useEffect(() => {
     setDataCards(todos)
@@ -136,6 +138,7 @@ export const Board = () => {
                 moveCardsParams={moveCardsParams}
                 setSelectedCard={setSelectedCard}
                 setMoveCardsParams={setMoveCardsParams}
+                setEditModalInfo={setEditModalInfo}
               />
             ))}
             <div
@@ -154,7 +157,13 @@ export const Board = () => {
       <CreateTodoModal
         isOpen={isCreateModalOpen}
         onClose={() => setIsCreateModalOpen(false)}
-        title="Create new Task"
+        modalTitle="Create new Task"
+      />
+      <EditTodoModal
+        isOpen={!!editModalInfo}
+        editModalInfo={editModalInfo}
+        onClose={() => setEditModalInfo(null)}
+        modalTitle="Edit Todo"
       />
     </div>
   )

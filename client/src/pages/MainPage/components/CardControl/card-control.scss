@@ -1,0 +1,31 @@
+.control-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  font-weight: 500;
+  font-size: 14px;
+  background: #fff;
+  border: 1px solid #000;
+  border-radius: 50%;
+  outline: none;
+  cursor: pointer;
+  transition: background 0.1s linear;
+
+  &:hover {
+    background: #eee;
+  }
+
+  .control-icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    & svg {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      color: #000;
+    }
+  }
+}

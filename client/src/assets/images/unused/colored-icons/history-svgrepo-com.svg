@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="-1.14 0 48 48" xmlns="http://www.w3.org/2000/svg">
+  <g id="Group_37" data-name="Group 37" transform="translate(-627.096 -464)">
+    <circle id="Ellipse_6" data-name="Ellipse 6" cx="5" cy="5" r="5" transform="translate(643.191 480)" fill="#7d50f9"/>
+    <g id="Group_36" data-name="Group 36">
+      <path id="Path_45" data-name="Path 45" d="M629.1,485a19.037,19.037,0,0,1,38.045-1h-3.568l4.618,9.236L672.81,484h-3.669a21.035,21.035,0,0,0-42.045,1A21.323,21.323,0,0,0,648,506v-2A19.252,19.252,0,0,1,629.1,485Z" fill="#303033"/>
+      <path id="Path_46" data-name="Path 46" d="M661.191,485h-2A11.048,11.048,0,1,1,647,474.051v2.567L654.236,473,647,469.382v2.67A13,13,0,1,0,661.191,485Z" fill="#303033"/>
+      <path id="Path_47" data-name="Path 47" d="M663.191,500a6,6,0,1,0,6,6A6.007,6.007,0,0,0,663.191,500Zm0,10a4,4,0,1,1,4-4A4,4,0,0,1,663.191,510Z" fill="#303033"/>
+      <circle id="Ellipse_7" data-name="Ellipse 7" cx="2" cy="2" r="2" transform="translate(661.191 504)" fill="#303033"/>
+    </g>
+  </g>
+</svg>

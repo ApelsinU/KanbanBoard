@@ -1,6 +1,7 @@
 export interface ITodosStore {
   todos: IDataCards
   createTodo: ({ id, text, status }: ICreateTodo) => void
+  editTodo: ({ id, text, status }: IEditTodo) => void
   deleteTodo: ({ id }: IDeleteTodo) => void
 }
 
@@ -15,12 +16,18 @@ export interface ICardItem {
   id: number
 }
 
-type Status = 'todo' | 'progress' | 'done'
+export type Status = 'todo' | 'progress' | 'done'
 
 export interface ICreateTodo {
   text: string
   id: number
   status: Status
+}
+
+export interface IEditTodo {
+  id: number
+  status: Status
+  text: string
 }
 
 export interface IDeleteTodo {
