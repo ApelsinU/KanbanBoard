@@ -5,15 +5,15 @@
   padding: 0 12px;
   color: #fff;
   font-weight: 500;
-  background-color: #000;
+  background: #000;
   border: none;
   border-radius: 8px;
   outline: none;
   cursor: pointer;
-  transition: all 0.2s linear;
+  transition: background 0.2s linear;
 
   &:hover {
-    background-color: rgba(0, 0, 0, 0.85);
+    background: rgba(0, 0, 0, 0.85);
   }
 
   &:disabled {

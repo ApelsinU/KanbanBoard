@@ -10,7 +10,9 @@
   border-radius: 50%;
   outline: none;
   cursor: pointer;
-  transition: all 0.1s linear;
+  transition:
+    color,
+    background 0.1s linear;
 
   &:hover {
     color: #fff;
@@ -25,6 +27,6 @@
     width: 10px;
     height: 10px;
     color: #000;
-    transition: all 0.1s linear;
+    transition: color 0.1s linear;
   }
 }

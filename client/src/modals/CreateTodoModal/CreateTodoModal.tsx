@@ -12,10 +12,10 @@ import { Modal } from '../Modal'
 interface ICreateTodoModal {
   isOpen: SetStateAction<boolean>
   onClose: MouseEventHandler<HTMLButtonElement>
-  title: string
+  modalTitle: string
 }
 
-export const CreateTodoModal = ({ isOpen, onClose, title }: ICreateTodoModal) => {
+export const CreateTodoModal = ({ isOpen, onClose, modalTitle }: ICreateTodoModal) => {
   //const todos = useTodosStore((state) => state.todos)
   const createTodo = useTodosStore((state) => state.createTodo)
   const [createCardData, setCreateCardData] = useState<ICreateTodo | null>(null)
@@ -38,7 +38,7 @@ export const CreateTodoModal = ({ isOpen, onClose, title }: ICreateTodoModal) =>
   }
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title={title}>
+    <Modal isOpen={isOpen} onClose={onClose} title={modalTitle}>
       <div className={'modal-create-container'}>
         <Input
           name="create_todo"
