@@ -1,6 +1,7 @@
 import { useTodosStore } from '@App/zustand/stores/todosStore'
-import { IDataCards, ICardItem } from '@App/zustand/types/todosTypes'
+import { IDataCards, ICardItem, Status } from '@App/zustand/types/todosTypes'
 
+// todo: need to refactor: remove hook and rewrite methods
 export function useTodosHelper() {
   const todos = useTodosStore((state) => state.todos)
 
@@ -19,6 +20,13 @@ function concatToArray(todosObj: IDataCards | null) {
   )
 
   return array
+}
+
+export function generateUniqId(todos: IDataCards, status: Status, index?: number) {
+  const idCol = (Object.keys(todos).indexOf(status) + 1) * 1000
+  const idRow = index ? index : todos[status].length + 1
+
+  return idCol + idRow
 }
 
 // function parseToObject(todosArray: IDataCards | null) {
