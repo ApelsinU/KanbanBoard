@@ -29,6 +29,7 @@ export const Card = ({
       ...moveCardsParams,
       cardId: item.id,
       cardText: item.text,
+      sourceCol: initCol,
     })
   }
 
@@ -42,11 +43,10 @@ export const Card = ({
 
   return (
     <div className="card" draggable onDragStart={dragStart} onDragEnd={dragEnd}>
-      {item.text}
+      {item.id} {item.text}
       <div className={'controls-block'}>
         <CardControl icon={<EditIcon />} onClick={handleEditClick} />
         <CardControl icon={<DeleteBinIcon />} onClick={handleDeleteClick} />
-        {/*<CloseButton width={24} height={24} onClick={handleDeleteClick} />*/}
       </div>
     </div>
   )
