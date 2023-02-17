@@ -22,8 +22,8 @@ export const RouterContainer = ({ isAuth }: IRouterContainer) => {
           <Route path="/registration" element={<Registration />} />
         </Route>
 
-        <Route element={<PrivateRoute isAuth={isAuth} />}>
-          <Route path="/" element={<AccountPage />} />
+        <Route path="/" element={<PrivateRoute isAuth={isAuth} />}>
+          {/*<Route path="/" element={<AccountPage />} />*/}
           <Route path="/account" element={<AccountPage />} />
           <Route path="/kanban" element={<MainPage />} />
         </Route>

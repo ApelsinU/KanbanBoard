@@ -5,7 +5,7 @@
 - Fetch, Custom hook for Http
 - Zustand State Manager
 - 
-- Others: Craco, React RouterContainer v6, Eslint, Stylelint, Prettier, TS-Alias
+- Others: Craco, React Router v6, Eslint, Stylelint, Prettier, TS-Alias
 
 
 ## Backend
@@ -21,7 +21,8 @@
 - Add Confirm password field to registration
 - Add notifications and errors to frontend
 
-### Kanban
+### Router
+- fix bug: when auth=true - remove redirecting to "/account" page after reload page
 
 ### Mongo-DB
 - Connect cards list to DB

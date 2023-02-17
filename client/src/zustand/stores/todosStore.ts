@@ -27,6 +27,10 @@ export const useTodosStore = create<ITodosStore>()(
             { id: 3002, text: 'Relax' },
           ],
         },
+        //
+        // getAllTodos: () => set((state) => {
+        //     state.todos =
+        // }),
 
         addTodo: ({ id, text, status }) =>
           set((state) => {
