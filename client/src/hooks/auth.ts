@@ -4,7 +4,7 @@ import { UserResponseData } from '@App/types/http'
 import { useUserStore } from '@App/zustand/stores/userStore'
 
 export const useAuth = () => {
-  const [isAuth, setIsAuth] = useState<boolean>(false)
+  const [isAuth, setIsAuth] = useState<boolean | null>(null)
   const userData = useUserStore((state) => state.userData)
   const refreshUserData = useUserStore((state) => state.refreshUserData)
 

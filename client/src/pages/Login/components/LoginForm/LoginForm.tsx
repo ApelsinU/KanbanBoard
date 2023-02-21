@@ -40,7 +40,7 @@ export const LoginForm = () => {
         type="text"
         placeholder="Username"
         onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
-        value={formData.username}
+        //value={formData.username}
       />
 
       <Input
@@ -48,7 +48,7 @@ export const LoginForm = () => {
         type="password"
         placeholder="Password"
         onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
-        value={formData.password}
+        //value={formData.password}
       />
 
       <Button text="Login" height={45} isLoading={isLoading} />

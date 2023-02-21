@@ -3,13 +3,15 @@ import React from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
 
 interface IAuthRouteProps {
-  isAuth: boolean
+  isAuth: boolean | null
 }
 
 export const AuthRoute = ({ isAuth }: IAuthRouteProps) => {
+  if (isAuth === true) return <Navigate to="/account" />
+
   return (
     <React.Suspense fallback={'loading...'}>
-      {!isAuth ? <Outlet /> : <Navigate to="/account" />}
+      <Outlet />
     </React.Suspense>
   )
 }
