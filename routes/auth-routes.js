@@ -3,7 +3,7 @@ const config = require("config");
 const { Router } = require("express");
 const { check, validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
-const User = require("../database/User");
+const User = require("../database/models/User");
 
 const router = Router();
 module.exports = router;
@@ -94,7 +94,11 @@ router.post(
 
       const hashedPassword = await bcrypt.hash(password, 17);
 
-      const user = new User({ username: username, email: email, password: hashedPassword });
+      const user = new User({
+        username: username,
+        email: email,
+        password: hashedPassword,
+      });
 
       await user.save();
 
