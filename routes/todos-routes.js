@@ -9,8 +9,8 @@ module.exports = router;
 // api/todos/
 router.get("/", auth, async (req, res) => {
   try {
-    // const todos = await Todo.find({ owner: req.user.userId });
-    // res.json(todos);
+    const todos = await Todo.find({ owner: req.user.userId });
+    res.json(todos);
   } catch (e) {
     res.status(500).json({ message: "Something went wrong..." });
   }
