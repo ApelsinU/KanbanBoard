@@ -11,7 +11,7 @@ interface IInput {
 }
 
 export const Input = ({ name, type, placeholder, onChange, value, required = false }: IInput) => {
-  const [inputValue, setInputValue] = useState<IInput['value']>()
+  const [inputValue, setInputValue] = useState<IInput['value']>('')
 
   useEffect(() => {
     setInputValue(value)
