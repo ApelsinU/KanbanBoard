@@ -10,7 +10,7 @@ type RegisterFormData = {
   username: string
   email: string
   password: string
-  // confirm_password: string
+  confirm_password: string
 }
 export const RegistrationForm = () => {
   const { request, isLoading } = useHttp()
@@ -18,6 +18,7 @@ export const RegistrationForm = () => {
     username: '',
     email: '',
     password: '',
+    confirm_password: '',
   })
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -60,13 +61,14 @@ export const RegistrationForm = () => {
         value={formData.password}
       />
 
-      {/*<Input
+      <Input
         name="confirm_password"
         type="password"
         placeholder="Confirm Password *"
-        required
+        required={true}
         onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
-      />*/}
+        value={formData.confirm_password}
+      />
 
       <Button text={'Register'} height={45} isLoading={isLoading} />
     </form>

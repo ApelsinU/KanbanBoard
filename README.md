@@ -17,12 +17,15 @@
 
 
 ## ToDo
-### Auth
-- Add Confirm password field to registration
-- Add notifications and errors to frontend
+### Structure
+- Add roles: **Admin**, **User**
+- Add modes:
+  - **Admin** (can Manage all registered users),
+  - **User**,
+  - **Demo** (work only on store with persist, cant view Account info and save todos to backend)
 
-### Router
-- fix bug: when auth=true - remove redirecting to "/account" page after reload page
+### Auth
+- Add notifications and errors to frontend
 
 ### Mongo-DB
 - Connect cards list to DB

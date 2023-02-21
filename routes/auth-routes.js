@@ -62,15 +62,6 @@ router.post(
     check("password", "Password must be at least 6 symbols").isLength({
       min: 6,
     }),
-    // check("password", "Passwords doesn't match").equals(
-    //   router.body.confirm_password
-    // ),
-
-    // check("confirm_password", "Password must be at least 6 symbols")
-    //   .exists()
-    //   .isLength({
-    //     min: 6,
-    //   }),
   ],
   async (req, res) => {
     try {
@@ -83,7 +74,11 @@ router.post(
         });
       }
 
-      const { username, email, password } = req.body;
+      const { username, email, password, confirm_password } = req.body;
+
+      if (password !== confirm_password) {
+        return res.status(400).json({ message: "Passwords doesn't match" });
+      }
 
       const isUser = await User.findOne({ email: email });
       if (isUser) {
