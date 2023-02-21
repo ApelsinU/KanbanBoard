@@ -1,7 +1,9 @@
 import './card.scss'
 
+import { DeleteBinIcon, EditIcon } from '@Assets/icons/StrokeIcons'
+
 import { ICardProps } from '@App/pages/MainPage/components/Card/types'
-import { CloseButton } from '@App/ui/CloseButton/CloseButton'
+import { CardControl } from '@App/pages/MainPage/components/CardControl/CardControl'
 import { useTodosStore } from '@App/zustand/stores/todosStore'
 
 export const Card = ({
@@ -10,6 +12,7 @@ export const Card = ({
   setMoveCardsParams,
   setSelectedCard,
   initCol,
+  setEditModalInfo,
 }: ICardProps) => {
   const deleteTodo = useTodosStore((state) => state.deleteTodo)
 
@@ -26,6 +29,7 @@ export const Card = ({
       ...moveCardsParams,
       cardId: item.id,
       cardText: item.text,
+      sourceCol: initCol,
     })
   }
 
@@ -33,10 +37,17 @@ export const Card = ({
     deleteTodo({ id: item.id, status: initCol })
   }
 
+  function handleEditClick() {
+    setEditModalInfo({ id: item.id, status: initCol, text: item.text })
+  }
+
   return (
     <div className="card" draggable onDragStart={dragStart} onDragEnd={dragEnd}>
-      {item.text}
-      <CloseButton width={24} height={24} onClick={handleDeleteClick} />
+      {item.id} {item.text}
+      <div className={'controls-block'}>
+        <CardControl icon={<EditIcon />} onClick={handleEditClick} />
+        <CardControl icon={<DeleteBinIcon />} onClick={handleDeleteClick} />
+      </div>
     </div>
   )
 }

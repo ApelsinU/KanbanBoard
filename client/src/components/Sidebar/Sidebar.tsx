@@ -1,7 +1,8 @@
 import './sidebar.scss'
 
-import { AccountIcon } from '@Assets/icons/AccountIcon'
-import { KanbanIcon } from '@Assets/icons/KanbanIcon'
+// import { AccountIcon } from '@Assets/icons/AccountIcon'
+// import { KanbanIcon } from '@Assets/icons/KanbanIcon'
+import { KanbanIcon, UserIcon } from '@Assets/icons/StrokeIcons'
 import logo from '@Assets/images/logo-black-short.png'
 import { NavLink, useLocation } from 'react-router-dom'
 
@@ -19,17 +20,15 @@ export const Sidebar = () => {
           to="/account"
         >
           <div className="nav-link-icon">
-            <AccountIcon className="icon" width="15" />
+            <UserIcon className="icon" width="22" height="22" />
+            {/*<AccountIcon className="icon" width="15" />*/}
           </div>
           <span>Account</span>
         </NavLink>
         {/*<DropMenuLink />*/}
-        <NavLink
-          className={`nav-link ${location.pathname === '/kanban' && 'active'}`}
-          to="/kanban"
-        >
+        <NavLink className={`nav-link ${location.pathname === '/kanban' && 'active'}`} to="/kanban">
           <div className="nav-link-icon">
-            <KanbanIcon className="icon" width="20" />
+            <KanbanIcon className="icon" width="32" height="32" />
           </div>
           <span>Kanban</span>
         </NavLink>

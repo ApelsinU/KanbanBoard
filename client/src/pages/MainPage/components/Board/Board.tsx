@@ -6,15 +6,17 @@ import ToDoListIcon from '@Assets/images/check-list.png'
 import TimeIcon from '@Assets/images/hourglass.png'
 
 import { CreateTodoModal } from '@App/modals/CreateTodoModal/CreateTodoModal'
+import { EditTodoModal } from '@App/modals/EditTodoModal/EditTodoModal'
 import { IMoveCardsParams, ISelectedCard } from '@App/pages/MainPage/components/Board/types'
 import { useTodosStore } from '@App/zustand/stores/todosStore'
-import { ICardItem, IDataCards } from '@App/zustand/types/todosTypes'
+import { ICardItem, IDataCards, IEditTodo, Status } from '@App/zustand/types/todosTypes'
 
 import { Card } from '../Card/Card'
 import { CreateCard } from '../CreateCard/CreateCard'
 
 export const Board = () => {
   const todos = useTodosStore((state) => state.todos)
+  const refreshTodos = useTodosStore((state) => state.refreshTodos)
 
   const CardsIcons = {
     todo: ToDoListIcon,
@@ -25,11 +27,13 @@ export const Board = () => {
   const [dataCards, setDataCards] = useState<IDataCards | null>(null)
   const [moveCardsParams, setMoveCardsParams] = useState<IMoveCardsParams>({
     cardId: 0,
-    targetCol: 'noStatus',
+    targetCol: 'unset',
+    sourceCol: 'unset',
     cardText: '',
   })
   const [selectedCard, setSelectedCard] = useState<ISelectedCard | null>(null)
   const [isCreateModalOpen, setIsCreateModalOpen] = useState<SetStateAction<boolean>>(false)
+  const [editModalInfo, setEditModalInfo] = useState<IEditTodo | null>(null)
 
   useEffect(() => {
     setDataCards(todos)
@@ -44,67 +48,39 @@ export const Board = () => {
 
   useEffect(() => {
     if (dataCards && moveCardsParams.cardId !== 0) {
-      let draggedCard: ICardItem = {
-        id: 0,
-        text: '',
-      }
-
-      let sourceType = ''
-      const targetType = moveCardsParams.targetCol
-      let sourceCol: ICardItem[] = []
-      const targetCol: ICardItem[] =
-        moveCardsParams.targetCol !== 'noStatus' ? dataCards[moveCardsParams.targetCol] : []
-
-      Object.entries(dataCards).map((cards: any) =>
-        cards[1].map((card: ICardItem) => {
-          if (card.id === moveCardsParams.cardId) {
-            draggedCard = card
-            sourceType = cards[0]
-            sourceCol = cards[1]
-          }
-        }),
-      )
-
-      if (sourceType !== targetType) {
-        const sourceArr = [...sourceCol]
-        const targetArr = [...targetCol]
-
-        const updatedCols = {
-          ...dataCards,
-          [sourceType]: sourceArr,
-          [targetType]: targetArr,
-        }
-
-        setDataCards(updatedCols)
-
-        sourceArr.splice(sourceArr.indexOf(draggedCard), 1)
-        targetArr.push(draggedCard)
-      }
+      refreshTodos({
+        id: moveCardsParams.cardId,
+        text: moveCardsParams.cardText,
+        sourceCol: moveCardsParams.sourceCol,
+        targetCol: moveCardsParams.targetCol,
+      })
     }
 
     setMoveCardsParams({
       cardId: 0,
-      targetCol: 'noStatus',
+      targetCol: 'unset',
+      sourceCol: 'unset',
       cardText: '',
     })
   }, [moveCardsParams.cardId])
 
-  function getFormattedText(str: string) {
-    let formattedText = ''
-    str.split('').map((el) => {
-      if (el === el.toUpperCase()) {
-        formattedText += ' '
-      }
-      formattedText += el
-    })
-
-    return formattedText
+  function getColTitles(status: Status) {
+    switch (status) {
+      case 'todo':
+        return 'ToDo'
+      case 'progress':
+        return 'In Progress'
+      case 'done':
+        return 'Done'
+      default:
+        return ''
+    }
   }
 
   return (
     <div className="board">
       {dataCards &&
-        (Object.keys(dataCards) as (keyof IDataCards)[]).map((cardKey: keyof IDataCards) => (
+        (Object.keys(dataCards) as Status[]).map((cardKey: Status) => (
           <div
             key={cardKey}
             className={`col ${
@@ -120,7 +96,7 @@ export const Board = () => {
               </div>
               <div className="header-text">
                 <span>
-                  {getFormattedText(cardKey)}
+                  {getColTitles(cardKey)}
                   <div className="header-count">
                     <span>{dataCards[cardKey].length}</span>
                   </div>
@@ -136,6 +112,7 @@ export const Board = () => {
                 moveCardsParams={moveCardsParams}
                 setSelectedCard={setSelectedCard}
                 setMoveCardsParams={setMoveCardsParams}
+                setEditModalInfo={setEditModalInfo}
               />
             ))}
             <div
@@ -147,14 +124,19 @@ export const Board = () => {
             >
               {selectedCard?.cardText}
             </div>
-
             {cardKey === 'todo' && <CreateCard setIsCreateModalOpen={setIsCreateModalOpen} />}
           </div>
         ))}
       <CreateTodoModal
         isOpen={isCreateModalOpen}
         onClose={() => setIsCreateModalOpen(false)}
-        title="Create new Task"
+        modalTitle="Create new Task"
+      />
+      <EditTodoModal
+        isOpen={!!editModalInfo}
+        editModalInfo={editModalInfo}
+        onClose={() => setEditModalInfo(null)}
+        modalTitle="Edit Todo"
       />
     </div>
   )

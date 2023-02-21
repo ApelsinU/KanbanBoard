@@ -1,44 +1,43 @@
 import './create-todo-modal.scss'
 import { ChangeEvent, MouseEventHandler, SetStateAction, useState } from 'react'
 
-import { useTodosHelper } from '@App/helpers/todosHelper'
+import { generateUniqId } from '@App/helpers/todosHelper'
 import { Button } from '@App/ui/Button/Button'
 import { Input } from '@App/ui/Input/Input'
 import { useTodosStore } from '@App/zustand/stores/todosStore'
-import { ICreateTodo } from '@App/zustand/types/todosTypes'
+import { IAddTodo } from '@App/zustand/types/todosTypes'
 
 import { Modal } from '../Modal'
 
 interface ICreateTodoModal {
   isOpen: SetStateAction<boolean>
   onClose: MouseEventHandler<HTMLButtonElement>
-  title: string
+  modalTitle: string
 }
 
-export const CreateTodoModal = ({ isOpen, onClose, title }: ICreateTodoModal) => {
-  //const todos = useTodosStore((state) => state.todos)
-  const createTodo = useTodosStore((state) => state.createTodo)
-  const [createCardData, setCreateCardData] = useState<ICreateTodo | null>(null)
-  const { todosCount } = useTodosHelper()
+export const CreateTodoModal = ({ isOpen, onClose, modalTitle }: ICreateTodoModal) => {
+  const todos = useTodosStore((state) => state.todos)
+  const addTodo = useTodosStore((state) => state.addTodo)
+  const [createCardData, setCreateCardData] = useState<IAddTodo | null>(null)
 
   function onCreateClick(e: any) {
     if (!createCardData) return null
 
-    createTodo(createCardData)
+    addTodo(createCardData)
     setCreateCardData(null)
     onClose(e)
   }
 
   function handleCreateChange(e: ChangeEvent<HTMLInputElement>) {
     setCreateCardData({
-      id: todosCount + 1,
+      id: generateUniqId(todos, 'todo'),
       text: e.target.value,
       status: 'todo',
     })
   }
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title={title}>
+    <Modal isOpen={isOpen} onClose={onClose} title={modalTitle}>
       <div className={'modal-create-container'}>
         <Input
           name="create_todo"

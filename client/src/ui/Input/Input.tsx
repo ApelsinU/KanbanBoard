@@ -1,5 +1,5 @@
 import './input.scss'
-import {  useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 interface IInput {
   name: string
@@ -11,7 +11,7 @@ interface IInput {
 }
 
 export const Input = ({ name, type, placeholder, onChange, value, required = false }: IInput) => {
-  const [inputValue, setInputValue] = useState<IInput['value']>('')
+  const [inputValue, setInputValue] = useState<IInput['value']>()
 
   useEffect(() => {
     setInputValue(value)

@@ -2,8 +2,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 50px;
-  padding: 16px;
+  min-height: 56px;
+  padding: 8px 16px;
   color: #484848;
   font-weight: 500;
   font-size: 15px;
@@ -12,10 +12,23 @@
   border-radius: 8px;
   box-shadow: 0 0 4px 2px #e5e5e5;
   cursor: pointer;
-  transition: all 0.1s linear;
+  transition:
+    background-color,
+    box-shadow 0.1s linear;
 
   &:hover {
     background-color: #fafafa;
     box-shadow: 0 0 4px 4px #e5e5e5;
+
+    .controls-block {
+      opacity: 1;
+    }
+  }
+
+  .controls-block {
+    display: flex;
+    column-gap: 8px;
+    opacity: 0;
+    transition: opacity 0.1s linear;
   }
 }

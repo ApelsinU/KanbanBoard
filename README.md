@@ -22,9 +22,10 @@
 - Add notifications and errors to frontend
 
 ### Kanban
-- Add ability to Create, Delete, Edit cards
-- Add ability to Change position of the cards
 
 ### Mongo-DB
-- Connect cards list to Mongo
-- Add refresh request to Mongo on each card changing
+- Connect cards list to DB
+- Write add, delete, edit requests to DB
+
+## Links
+- icons - https://www.svgrepo.com/collection/kalai-oval-interface-icons/10
