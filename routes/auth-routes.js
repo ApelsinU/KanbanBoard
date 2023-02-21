@@ -66,7 +66,7 @@ router.post(
   async (req, res) => {
     try {
       const errors = validationResult(req);
-      //console.log("errors", errors);
+
       if (!errors.isEmpty()) {
         return res.status(400).json({
           errors: errors.array(),
@@ -86,8 +86,7 @@ router.post(
           .status(400)
           .json({ message: "User with the same email already exist" });
       }
-
-      const hashedPassword = await bcrypt.hash(password, 17);
+      const hashedPassword = await bcrypt.hash(password, config.get("salt"));
 
       const user = new User({
         username: username,
