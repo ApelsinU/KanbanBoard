@@ -1,7 +1,7 @@
 const Todo = require("../database/models/Todo");
 const { Router } = require("express");
 
-const { auth } = require("../interceptors/auth-interceptor");
+const auth = require("../interceptors/auth-interceptor");
 
 const router = Router();
 module.exports = router;
