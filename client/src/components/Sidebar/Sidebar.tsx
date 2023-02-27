@@ -6,7 +6,7 @@ import { KanbanIcon, UserIcon } from '@Assets/icons/StrokeIcons'
 import logo from '@Assets/images/logo-black-short.png'
 import { NavLink, useLocation } from 'react-router-dom'
 
-import { DropMenuLink } from '@App/components/DropMenuLink/DropMenuLink'
+import { DropMenuLink } from './DropMenuLink/DropMenuLink'
 
 export const Sidebar = () => {
   const location = useLocation()

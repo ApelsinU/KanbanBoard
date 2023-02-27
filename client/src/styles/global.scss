@@ -16,6 +16,7 @@ body {
   background-color: #f2f2f2;
 }
 
+// todo: refactor to PageWrapper
 .container {
   display: grid;
   grid-template-columns: 300px 1fr;
@@ -26,4 +27,8 @@ body {
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 0 8px 8px #efefef;
+
+  &.no-split {
+    display: flex;
+  }
 }

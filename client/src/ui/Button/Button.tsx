@@ -12,6 +12,7 @@ export interface IButtonProps {
   height?: number
   theme?: ''
   disable?: boolean
+  url?: string
 }
 
 export const Button = ({
@@ -22,7 +23,16 @@ export const Button = ({
   height,
   theme,
   disable = false,
+  url,
 }: IButtonProps) => {
+  if (url) {
+    return (
+      <a className={`button theme-${theme}`} style={{ height: `${height}px` }} href={url}>
+        {text}
+      </a>
+    )
+  }
+
   return (
     <button
       className={`button theme-${theme}`}
