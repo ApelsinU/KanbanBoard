@@ -17,6 +17,13 @@
 
 
 ## ToDo
+### Business
+- Save Cards to user account (sync with backend)
+- Add groups (categories) for Card
+- Add additional filed Description to Card
+- Add ability to create/rename/delete new Kanban board
+- Multiply Kanban boards on page
+
 ### Structure
 - Add roles: **Admin**, **User**
 - Add modes:
