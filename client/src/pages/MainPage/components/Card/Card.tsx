@@ -2,6 +2,7 @@ import './card.scss'
 
 import { DeleteBinIcon, EditIcon } from '@Assets/icons/StrokeIcons'
 
+import { useHttp } from '@App/hooks/http'
 import { ICardProps } from '@App/pages/MainPage/components/Card/types'
 import { CardControl } from '@App/pages/MainPage/components/CardControl/CardControl'
 import { useTodosStore } from '@App/zustand/stores/todosStore'
@@ -15,11 +16,12 @@ export const Card = ({
   setEditModalInfo,
 }: ICardProps) => {
   const deleteTodo = useTodosStore((state) => state.deleteTodo)
+  const { request } = useHttp()
 
   const dragStart = () => {
     setSelectedCard({
       cardId: item.id,
-      cardText: item.text,
+      cardText: item.title,
       initCol: initCol,
     })
   }
@@ -28,22 +30,27 @@ export const Card = ({
     setMoveCardsParams({
       ...moveCardsParams,
       cardId: item.id,
-      cardText: item.text,
+      cardText: item.title,
       sourceCol: initCol,
     })
   }
 
   function handleDeleteClick() {
-    deleteTodo({ id: item.id, status: initCol })
+    deleteTodoAsync() // DB
+
+    deleteTodo({ id: item.id, status: initCol }) // Zustand
   }
 
   function handleEditClick() {
-    setEditModalInfo({ id: item.id, status: initCol, text: item.text })
+    setEditModalInfo({ id: item.id, status: initCol, title: item.title })
+  }
+  async function deleteTodoAsync() {
+    await request('api/todos/delete', 'DELETE', { id: item.id, status: initCol })
   }
 
   return (
     <div className="card" draggable onDragStart={dragStart} onDragEnd={dragEnd}>
-      {item.id} {item.text}
+      {item.id} {item.title}
       <div className={'controls-block'}>
         <CardControl icon={<EditIcon />} onClick={handleEditClick} />
         <CardControl icon={<DeleteBinIcon />} onClick={handleDeleteClick} />

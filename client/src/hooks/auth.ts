@@ -21,6 +21,7 @@ export const useAuth = () => {
   }, [userData])
 
   return {
+    userData,
     login,
     logout,
     isAuth,

@@ -1,6 +1,7 @@
 import './edit-todo-modal.scss'
 import { ChangeEvent, MouseEventHandler, SetStateAction, useEffect, useState } from 'react'
 
+import { useHttp } from '@App/hooks/http'
 import { Button } from '@App/ui/Button/Button'
 import { Input } from '@App/ui/Input/Input'
 import { useTodosStore } from '@App/zustand/stores/todosStore'
@@ -17,19 +18,30 @@ interface IEditTodoModal {
 
 export const EditTodoModal = ({ isOpen, onClose, modalTitle, editModalInfo }: IEditTodoModal) => {
   const editTodo = useTodosStore((state) => state.editTodo)
-  const [editCardText, setEditCardText] = useState<string>('')
+  const [editCardTitle, setEditCardTitle] = useState<string>('')
+  const { request } = useHttp()
 
   function onEditClick(e: any) {
-    if (!editCardText) return null
+    if (!editCardTitle) return null
     if (!editModalInfo) return null
 
-    editTodo({ id: editModalInfo.id, status: editModalInfo.status, text: editCardText })
-    setEditCardText('')
+    editTodoAsync() // DB
+
+    editTodo({ id: editModalInfo.id, status: editModalInfo.status, title: editCardTitle }) // Zustand
+    setEditCardTitle('')
     onClose(e)
   }
 
+  async function editTodoAsync() {
+    await request('api/todos/edit', 'PUT', {
+      id: editModalInfo?.id,
+      status: editModalInfo?.status,
+      title: editCardTitle,
+    })
+  }
+
   useEffect(() => {
-    editModalInfo && editModalInfo.text && setEditCardText(editModalInfo.text)
+    editModalInfo && editModalInfo.title && setEditCardTitle(editModalInfo.title)
   }, [editModalInfo])
 
   return (
@@ -39,10 +51,10 @@ export const EditTodoModal = ({ isOpen, onClose, modalTitle, editModalInfo }: IE
           name="create_todo"
           type="text"
           required={true}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => setEditCardText(e.target.value)}
-          value={editCardText ? editCardText : ''}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => setEditCardTitle(e.target.value)}
+          value={editCardTitle ? editCardTitle : ''}
         />
-        <Button text="Edit" height={45} disable={!editCardText} onClick={(e) => onEditClick(e)} />
+        <Button text="Edit" height={45} disable={!editCardTitle} onClick={(e) => onEditClick(e)} />
       </div>
     </Modal>
   )

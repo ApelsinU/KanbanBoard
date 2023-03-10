@@ -1,9 +1,9 @@
 export interface ITodosStore {
   todos: IDataCards
-  addTodo: ({ id, text, status }: IAddTodo) => void
-  editTodo: ({ id, text, status }: IEditTodo) => void
+  addTodo: ({ id, title, status }: IAddTodo) => void
+  editTodo: ({ id, title, status }: IEditTodo) => void
   deleteTodo: ({ id }: IDeleteTodo) => void
-  refreshTodos: ({ id, text, sourceCol, targetCol }: IRefreshTodos) => void
+  refreshTodos: ({ id, title, sourceCol, targetCol }: IRefreshTodos) => void
 }
 
 export interface IDataCards {
@@ -13,14 +13,14 @@ export interface IDataCards {
 }
 
 export interface ICardItem {
-  text: string
+  title: string
   id: number
 }
 
 export type Status = 'todo' | 'progress' | 'done'
 
 export interface IAddTodo {
-  text: string
+  title: string
   id: number
   status: Status
 }
@@ -28,7 +28,7 @@ export interface IAddTodo {
 export interface IEditTodo {
   id: number
   status: Status
-  text: string
+  title: string
 }
 
 export interface IDeleteTodo {
@@ -38,7 +38,7 @@ export interface IDeleteTodo {
 
 export interface IRefreshTodos {
   id: number
-  text: string
+  title: string
   sourceCol: Status | 'unset'
   targetCol: Status | 'unset'
 }

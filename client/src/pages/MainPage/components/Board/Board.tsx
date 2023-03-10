@@ -50,7 +50,7 @@ export const Board = () => {
     if (dataCards && moveCardsParams.cardId !== 0) {
       refreshTodos({
         id: moveCardsParams.cardId,
-        text: moveCardsParams.cardText,
+        title: moveCardsParams.cardText,
         sourceCol: moveCardsParams.sourceCol,
         targetCol: moveCardsParams.targetCol,
       })

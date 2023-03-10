@@ -2,6 +2,7 @@ import './create-todo-modal.scss'
 import { ChangeEvent, MouseEventHandler, SetStateAction, useState } from 'react'
 
 import { generateUniqId } from '@App/helpers/todosHelper'
+import { useHttp } from '@App/hooks/http'
 import { Button } from '@App/ui/Button/Button'
 import { Input } from '@App/ui/Input/Input'
 import { useTodosStore } from '@App/zustand/stores/todosStore'
@@ -19,19 +20,30 @@ export const CreateTodoModal = ({ isOpen, onClose, modalTitle }: ICreateTodoModa
   const todos = useTodosStore((state) => state.todos)
   const addTodo = useTodosStore((state) => state.addTodo)
   const [createCardData, setCreateCardData] = useState<IAddTodo | null>(null)
+  const { request } = useHttp()
 
   function onCreateClick(e: any) {
-    if (!createCardData) return null
+    if (!createCardData) return
 
-    addTodo(createCardData)
+    addTodoAsync() // DB
+    addTodo(createCardData) // Zustand
+
     setCreateCardData(null)
     onClose(e)
+  }
+
+  async function addTodoAsync() {
+    await request('api/todos/add', 'POST', {
+      id: createCardData?.id,
+      title: createCardData?.title,
+      status: createCardData?.status,
+    })
   }
 
   function handleCreateChange(e: ChangeEvent<HTMLInputElement>) {
     setCreateCardData({
       id: generateUniqId(todos, 'todo'),
-      text: e.target.value,
+      title: e.target.value,
       status: 'todo',
     })
   }
@@ -44,7 +56,7 @@ export const CreateTodoModal = ({ isOpen, onClose, modalTitle }: ICreateTodoModa
           type="text"
           required={true}
           onChange={(e: ChangeEvent<HTMLInputElement>) => handleCreateChange(e)}
-          value={createCardData ? createCardData.text : ''}
+          value={createCardData ? createCardData.title : ''}
         />
         <Button
           text="Create"

@@ -14,17 +14,17 @@ export const useTodosStore = create<ITodosStore>()(
         // we use 1000, 2000, 3000 for uniq ids in each col
         todos: {
           todo: [
-            { id: 1001, text: 'Do tasks' },
-            { id: 1002, text: 'Install' },
-            { id: 1003, text: 'Train hard' },
+            { id: 1001, title: 'Do tasks' },
+            { id: 1002, title: 'Install' },
+            { id: 1003, title: 'Train hard' },
           ],
           progress: [
-            { id: 2001, text: 'Delete' },
-            { id: 2002, text: 'Learn' },
+            { id: 2001, title: 'Delete' },
+            { id: 2002, title: 'Learn' },
           ],
           done: [
-            { id: 3001, text: 'Lunch' },
-            { id: 3002, text: 'Relax' },
+            { id: 3001, title: 'Lunch' },
+            { id: 3002, title: 'Relax' },
           ],
         },
         //
@@ -32,15 +32,15 @@ export const useTodosStore = create<ITodosStore>()(
         //     state.todos =
         // }),
 
-        addTodo: ({ id, text, status }) =>
+        addTodo: ({ id, title, status }) =>
           set((state) => {
-            state.todos[status].push({ id, text })
+            state.todos[status].push({ id, title })
           }),
 
-        editTodo: ({ id, status, text }) =>
+        editTodo: ({ id, status, title }) =>
           set((state) => {
             state.todos[status] = state.todos[status].map((card: ICardItem) =>
-              card.id === id ? { id, text } : card,
+              card.id === id ? { id, title } : card,
             )
           }),
 
@@ -62,14 +62,14 @@ export const useTodosStore = create<ITodosStore>()(
           }),
 
         // todo: Board use status 'unset', need to solve how to remove it
-        refreshTodos: ({ id, text, sourceCol, targetCol }) =>
+        refreshTodos: ({ id, title, sourceCol, targetCol }) =>
           set((state) => {
             if (targetCol === 'unset') return null
             if (sourceCol === 'unset') return null
             if (targetCol === sourceCol) return null
 
             const uId = generateUniqId(state.todos, targetCol)
-            state.addTodo({ id: uId, text, status: targetCol })
+            state.addTodo({ id: uId, title, status: targetCol })
             state.deleteTodo({ id, status: sourceCol })
 
             return null

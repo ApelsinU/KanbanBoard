@@ -21,6 +21,13 @@ async function start() {
       // useUnifiedTopology: true,
       // useCreateIndex: true,
     });
+
+    // const collection = db.collection('Books');
+    // const changeStream = collection.watch();
+    // changeStream.on('change', event => {
+    //    // event — см. типы событий: https://docs.mongodb.com/manual/reference/change-events/
+    // });
+    // !!! Change Streams работает только если сервер MongoDB запущен в режиме кластера, а не как он по-умолчанию запускается. Немного подробностей о том, как это сделать: https://habr.com/ru/post/335772/ (см. раздел «Настройка и добавление серверов в Replica Set»).
   } catch (e) {
     console.log("Server Error", e.message);
     process.exit(1);
