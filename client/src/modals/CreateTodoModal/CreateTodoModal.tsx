@@ -1,12 +1,11 @@
 import './create-todo-modal.scss'
-import { ChangeEvent, MouseEventHandler, SetStateAction, useState } from 'react'
+import React, { ChangeEvent, MouseEventHandler, SetStateAction, useState } from 'react'
 
 import { generateUniqId } from '@App/helpers/todosHelper'
 import { useHttp } from '@App/hooks/http'
 import { Button } from '@App/ui/Button/Button'
 import { Input } from '@App/ui/Input/Input'
 import { useTodosStore } from '@App/zustand/stores/todosStore'
-import { IAddTodo } from '@App/zustand/types/todosTypes'
 
 import { Modal } from '../Modal'
 
@@ -19,31 +18,24 @@ interface ICreateTodoModal {
 export const CreateTodoModal = ({ isOpen, onClose, modalTitle }: ICreateTodoModal) => {
   const todos = useTodosStore((state) => state.todos)
   const addTodo = useTodosStore((state) => state.addTodo)
-  const [createCardData, setCreateCardData] = useState<IAddTodo | null>(null)
-  const { request } = useHttp()
+  const [createCardValue, setCreateCardValue] = useState<string>('')
+  const { request, isLoading } = useHttp()
 
-  function onCreateClick(e: any) {
-    if (!createCardData) return
+  function onCreateClick(e: React.MouseEvent<HTMLButtonElement>) {
+    if (!createCardValue) return
 
-    addTodoAsync() // DB
-    addTodo(createCardData) // Zustand
-
-    setCreateCardData(null)
-    onClose(e)
-  }
-
-  async function addTodoAsync() {
-    await request('api/todos/add', 'POST', {
-      id: createCardData?.id,
-      title: createCardData?.title,
-      status: createCardData?.status,
+    addTodoAsync().then((res) => {
+      const todo = res.todo ? res.todo : res
+      addTodo({ id: todo?.id, title: todo.title, status: todo.status })
+      setCreateCardValue('')
+      !isLoading && onClose(e)
     })
   }
 
-  function handleCreateChange(e: ChangeEvent<HTMLInputElement>) {
-    setCreateCardData({
+  async function addTodoAsync() {
+    return await request('api/todos/add', 'POST', {
       id: generateUniqId(todos, 'todo'),
-      title: e.target.value,
+      title: createCardValue,
       status: 'todo',
     })
   }
@@ -55,14 +47,16 @@ export const CreateTodoModal = ({ isOpen, onClose, modalTitle }: ICreateTodoModa
           name="create_todo"
           type="text"
           required={true}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => handleCreateChange(e)}
-          value={createCardData ? createCardData.title : ''}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => setCreateCardValue(e.target.value)}
+          value={createCardValue}
+          autoFocus={true}
         />
         <Button
           text="Create"
           height={45}
-          disable={!createCardData}
+          disable={!createCardValue}
           onClick={(e) => onCreateClick(e)}
+          isLoading={isLoading}
         />
       </div>
     </Modal>

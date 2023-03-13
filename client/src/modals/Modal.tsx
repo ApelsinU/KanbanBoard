@@ -1,4 +1,4 @@
-import { MouseEventHandler, SetStateAction, useEffect } from 'react'
+import React, { SetStateAction, useEffect } from 'react'
 
 import './modal.scss'
 import { CloseButton } from '@App/ui/CloseButton/CloseButton'
@@ -6,7 +6,7 @@ import { CloseButton } from '@App/ui/CloseButton/CloseButton'
 interface IModal {
   children: JSX.Element
   isOpen: SetStateAction<boolean>
-  onClose: MouseEventHandler<HTMLButtonElement>
+  onClose: React.MouseEventHandler<HTMLButtonElement>
   title?: string
 }
 

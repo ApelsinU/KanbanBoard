@@ -8,9 +8,18 @@ interface IInput {
   onChange?: any
   required?: boolean
   value?: string | number | readonly string[] | undefined
+  autoFocus?: boolean
 }
 
-export const Input = ({ name, type, placeholder, onChange, value, required = false }: IInput) => {
+export const Input = ({
+  name,
+  type,
+  placeholder,
+  onChange,
+  value,
+  required = false,
+  autoFocus = false,
+}: IInput) => {
   const [inputValue, setInputValue] = useState<IInput['value']>('')
 
   useEffect(() => {
@@ -26,6 +35,7 @@ export const Input = ({ name, type, placeholder, onChange, value, required = fal
       required={required}
       onChange={(e) => onChange(e)}
       value={inputValue}
+      autoFocus={autoFocus}
     />
   )
 }

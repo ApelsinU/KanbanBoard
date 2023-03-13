@@ -11,6 +11,7 @@ router.get("/", authInterceptor, async (req, res) => {
   try {
     const todos = await Todo.find({ owner: req.user.userId });
     res.json(todos);
+    res.status(201);
   } catch (e) {
     res.status(500).json({ message: "Something went wrong..." });
   }
@@ -29,23 +30,24 @@ router.get("/:id", async (req, res) => {
 // api/todos/add
 router.post("/add", authInterceptor, async (req, res) => {
   try {
-    const newTodo = req.body;
+    const { id, title, status } = req.body;
 
-    const isExist = await Todo.findOne({ newTodo });
+    const isExist = await Todo.findOne({ id: id });
     if (isExist) {
       return res.json({
-        message: "Error - Todo with same Id is already exist",
+        todo: isExist,
       });
     }
 
     const todo = new Todo({
-      id: newTodo.id,
-      title: newTodo.title,
-      status: newTodo.status,
+      id: id,
+      title: title,
+      status: status,
       owner: req.user.userId,
     });
 
     await todo.save();
+    res.json(todo);
     res.status(201);
   } catch (e) {
     res.status(500).json({ message: "Something went wrong..." });
@@ -64,7 +66,7 @@ router.put("/edit", async (req, res) => {
       });
     }
 
-    todo.update({ editTodo });
+    await todo.update({ editTodo });
     res.status(201);
   } catch (e) {
     res.status(500).json({ message: "Something went wrong..." });
@@ -83,7 +85,7 @@ router.delete("/delete", async (req, res) => {
       });
     }
 
-    todo.deleteOne({ deletedTodo });
+    await todo.deleteOne({ deletedTodo });
     res.status(201);
   } catch (e) {
     res.status(500).json({ message: "Something went wrong..." });
