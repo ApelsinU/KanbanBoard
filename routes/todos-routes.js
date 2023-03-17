@@ -10,6 +10,7 @@ module.exports = router;
 router.get("/", authInterceptor, async (req, res) => {
   try {
     const todos = await Todo.find({ owner: req.user.userId });
+    console.log("todos", todos);
     res.json(todos);
     res.status(201);
   } catch (e) {
@@ -57,16 +58,19 @@ router.post("/add", authInterceptor, async (req, res) => {
 // api/todos/edit
 router.put("/edit", async (req, res) => {
   try {
-    const editTodo = req.body;
+    const { id, title, status } = req.body;
 
-    const todo = await Todo.findOne({ editTodo });
+    const todo = await Todo.findOne({ id: id });
     if (!todo) {
       return res.json({
         message: `Error - Todo with such Id doesn't exist`,
       });
     }
 
-    await todo.update({ editTodo });
+    await todo.update({ id, title, status });
+    const newTodo = await Todo.findOne({ id: id });
+
+    res.json(newTodo);
     res.status(201);
   } catch (e) {
     res.status(500).json({ message: "Something went wrong..." });

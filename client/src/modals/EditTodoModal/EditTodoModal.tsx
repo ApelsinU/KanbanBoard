@@ -19,25 +19,31 @@ interface IEditTodoModal {
 export const EditTodoModal = ({ isOpen, onClose, modalTitle, editModalInfo }: IEditTodoModal) => {
   const editTodo = useTodosStore((state) => state.editTodo)
   const [editCardTitle, setEditCardTitle] = useState<string>('')
-  const { request } = useHttp()
+  const { request, isLoading } = useHttp()
 
   function onEditClick(e: any) {
     if (!editCardTitle) return null
     if (!editModalInfo) return null
 
-    editTodoAsync() // DB
-
-    editTodo({ id: editModalInfo.id, status: editModalInfo.status, title: editCardTitle }) // Zustand
-    setEditCardTitle('')
-    onClose(e)
+    editTodoAsync().then((res) => {
+      const todo = res.todo ? res.todo : res
+      editTodo({ id: todo?.id, title: todo.title, status: todo.status })
+      setEditCardTitle('')
+      !isLoading && onClose(e)
+    }) // DB
+    fetchTodos().then((res: any) => console.log(res)) // DB
   }
 
   async function editTodoAsync() {
-    await request('api/todos/edit', 'PUT', {
+    return await request('api/todos/edit', 'PUT', {
       id: editModalInfo?.id,
       status: editModalInfo?.status,
       title: editCardTitle,
     })
+  }
+
+  async function fetchTodos() {
+    return await request('api/todos/', 'GET')
   }
 
   useEffect(() => {
