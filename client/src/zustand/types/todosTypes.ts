@@ -33,7 +33,6 @@ export interface IEditTodo {
 
 export interface IDeleteTodo {
   id: number
-  status: Status
 }
 
 export interface IRefreshTodos {

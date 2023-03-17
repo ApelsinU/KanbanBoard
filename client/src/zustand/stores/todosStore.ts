@@ -41,19 +41,20 @@ export const useTodosStore = create<ITodosStore>()(
           }),
 
         // Delete card and shift array
-        deleteTodo: ({ id, status }) =>
+        deleteTodo: ({ id }) =>
           set((state) => {
             let deleted = false
+            ;(Object.keys(state.todos) as Status[]).forEach((status: Status) => {
+              state.todos[status] = state.todos[status].filter((card: ICardItem, index: number) => {
+                if (deleted) return (card.id = generateUniqId(state.todos, status, index))
 
-            state.todos[status] = state.todos[status].filter((card: ICardItem, index: number) => {
-              if (deleted) return (card.id = generateUniqId(state.todos, status, index))
-
-              if (card.id !== id) {
-                return (card.id = generateUniqId(state.todos, status, index + 1))
-              } else {
-                deleted = true
-                return null
-              }
+                if (card.id !== id) {
+                  return (card.id = generateUniqId(state.todos, status, index + 1))
+                } else {
+                  deleted = true
+                  return null
+                }
+              })
             })
           }),
 
@@ -66,7 +67,7 @@ export const useTodosStore = create<ITodosStore>()(
 
             const uId = generateUniqId(state.todos, targetCol)
             state.addTodo({ id: uId, title, status: targetCol })
-            state.deleteTodo({ id, status: sourceCol })
+            state.deleteTodo({ id })
 
             return null
           }),

@@ -36,16 +36,14 @@ export const Card = ({
   }
 
   function handleDeleteClick() {
-    deleteTodoAsync() // DB
-
-    deleteTodo({ id: item.id, status: initCol }) // Zustand
+    deleteTodoAsync().then(() => deleteTodo({ id: item.id })) // DB
   }
 
   function handleEditClick() {
     setEditModalInfo({ id: item.id, status: initCol, title: item.title })
   }
   async function deleteTodoAsync() {
-    await request('api/todos/delete', 'DELETE', { id: item.id, status: initCol })
+    return await request('api/todos/delete', 'DELETE', { id: item.id })
   }
 
   return (

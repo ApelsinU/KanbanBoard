@@ -80,16 +80,16 @@ router.put("/edit", async (req, res) => {
 // api/todos/delete
 router.delete("/delete", async (req, res) => {
   try {
-    const deletedTodo = req.body;
+    const { id } = req.body;
 
-    const todo = await Todo.findOne({ deletedTodo });
+    const todo = await Todo.findOne({ id: id });
     if (!todo) {
       return res.json({
         message: "Error - Todo with such Id doesn't exist",
       });
     }
 
-    await todo.deleteOne({ deletedTodo });
+    await todo.deleteOne({ id });
     res.status(201);
   } catch (e) {
     res.status(500).json({ message: "Something went wrong..." });
