@@ -77,10 +77,32 @@ router.put("/edit", async (req, res) => {
   }
 });
 
+// api/todos/move
+router.put("/move", async (req, res) => {
+  try {
+    const { id, new_id, new_status } = req.body;
+
+    const todo = await Todo.findOne({ id: id });
+    if (!todo) {
+      return res.json({
+        message: `Error - Todo with such Id doesn't exist`,
+      });
+    }
+
+    await todo.update({ new_id, title: todo.title, new_status });
+    const newTodo = await Todo.findOne({ id: new_id });
+
+    res.json(newTodo);
+    res.status(201);
+  } catch (e) {
+    res.status(500).json({ message: "Something went wrong..." });
+  }
+});
+
 // api/todos/delete
 router.delete("/delete", async (req, res) => {
   try {
-    const { id } = req.body;
+    const { id, status } = req.body;
 
     const todo = await Todo.findOne({ id: id });
     if (!todo) {

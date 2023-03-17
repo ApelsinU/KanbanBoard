@@ -1,10 +1,12 @@
-import React, { DragEvent, SetStateAction, useEffect, useRef, useState } from 'react'
+import React, { DragEvent, SetStateAction, useCallback, useEffect, useRef, useState } from 'react'
 import './board.scss'
 
 import DoneIcon from '@Assets/images/accepted.png'
 import ToDoListIcon from '@Assets/images/check-list.png'
 import TimeIcon from '@Assets/images/hourglass.png'
 
+import { generateUniqId } from '@App/helpers/todosHelper'
+import { useHttp } from '@App/hooks/http'
 import { CreateTodoModal } from '@App/modals/CreateTodoModal/CreateTodoModal'
 import { EditTodoModal } from '@App/modals/EditTodoModal/EditTodoModal'
 import { IMoveCardsParams, ISelectedCard } from '@App/pages/MainPage/components/Board/types'
@@ -16,7 +18,9 @@ import { CreateCard } from '../CreateCard/CreateCard'
 
 export const Board = () => {
   const todos = useTodosStore((state) => state.todos)
-  const refreshTodos = useTodosStore((state) => state.refreshTodos)
+  // const addTodo = useTodosStore((state) => state.addTodo)
+  // const deleteTodo = useTodosStore((state) => state.deleteTodo)
+  const { request } = useHttp()
 
   const CardsIcons = {
     todo: ToDoListIcon,
@@ -35,6 +39,22 @@ export const Board = () => {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState<SetStateAction<boolean>>(false)
   const [editModalInfo, setEditModalInfo] = useState<IEditTodo | null>(null)
 
+  //  todo:
+  async function asyncGetCards() {
+    try {
+      const todos = await request('/api/todos/', 'GET')
+      setDataCards(todos)
+    } catch (e) {}
+  }
+  useEffect(() => {
+    asyncGetCards()
+  }, [])
+
+  useEffect(() => {
+    console.log('dataCards', dataCards)
+  }, [dataCards])
+  //
+
   useEffect(() => {
     setDataCards(todos)
   }, [todos])
@@ -48,12 +68,7 @@ export const Board = () => {
 
   useEffect(() => {
     if (dataCards && moveCardsParams.cardId !== 0) {
-      refreshTodos({
-        id: moveCardsParams.cardId,
-        title: moveCardsParams.cardText,
-        sourceCol: moveCardsParams.sourceCol,
-        targetCol: moveCardsParams.targetCol,
-      })
+      moveTodoAsync()
     }
 
     setMoveCardsParams({
@@ -63,6 +78,18 @@ export const Board = () => {
       cardText: '',
     })
   }, [moveCardsParams.cardId])
+
+  async function moveTodoAsync() {
+    if (moveCardsParams.targetCol === 'unset') return null
+    if (moveCardsParams.sourceCol === 'unset') return null
+    if (moveCardsParams.targetCol === moveCardsParams.sourceCol) return null
+
+    return await request('api/todos/move', 'PUT', {
+      id: moveCardsParams.cardId,
+      new_id: generateUniqId(todos, moveCardsParams.targetCol),
+      new_status: moveCardsParams.targetCol,
+    })
+  }
 
   function getColTitles(status: Status) {
     switch (status) {
