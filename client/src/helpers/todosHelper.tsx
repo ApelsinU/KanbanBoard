@@ -22,20 +22,26 @@ function concatToArray(todosObj: IDataCards | null) {
   return array
 }
 
+export function parseToObject(todosArr: ICardItem[]) {
+  if (!todosArr) return {}
+
+  const obj: IDataCards  = {
+    todo: [],
+    progress: [],
+    done: [],
+  }
+
+  todosArr.map((todo: ICardItem) =>
+    // @ts-ignore
+    obj[todo.status].push({id: todo.id, title: todo.title})
+  )
+
+  return obj
+}
+
 export function generateUniqId(todos: IDataCards, status: Status, index?: number) {
   const idCol = (Object.keys(todos).indexOf(status) + 1) * 1000
   const idRow = index ? index : todos[status].length + 1
 
   return idCol + idRow
 }
-
-// function parseToObject(todosArray: IDataCards | null) {
-//   if (!todosObj) return []
-//   const array: ICardItem[] = []
-//
-//   Object.values(todosObj).map((arrCol: ICardItem[]) =>
-//       arrCol.map((card: ICardItem) => array.push(card)),
-//   )
-//
-//   return array
-// }

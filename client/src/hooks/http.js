@@ -15,7 +15,7 @@ export const useHttp = () => {
         body = JSON.stringify(body)
         headers = {
           ...headers,
-          Authorization: isAuth ? JSON.stringify(userData) : '',
+          // Authorization: isAuth ? JSON.stringify(userData) : '', // with that add request (probably others) don't work
           'Content-Type': 'application/json',
         }
       }

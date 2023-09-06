@@ -5,7 +5,8 @@ import DoneIcon from '@Assets/images/accepted.png'
 import ToDoListIcon from '@Assets/images/check-list.png'
 import TimeIcon from '@Assets/images/hourglass.png'
 
-import { generateUniqId } from '@App/helpers/todosHelper'
+import {generateUniqId, parseToObject, useTodosHelper} from '@App/helpers/todosHelper'
+import {useAuth} from "@App/hooks/auth";
 import { useHttp } from '@App/hooks/http'
 import { CreateTodoModal } from '@App/modals/CreateTodoModal/CreateTodoModal'
 import { EditTodoModal } from '@App/modals/EditTodoModal/EditTodoModal'
@@ -21,6 +22,7 @@ export const Board = () => {
   // const addTodo = useTodosStore((state) => state.addTodo)
   // const deleteTodo = useTodosStore((state) => state.deleteTodo)
   const { request } = useHttp()
+  const { userData } = useAuth()
 
   const CardsIcons = {
     todo: ToDoListIcon,
@@ -28,7 +30,7 @@ export const Board = () => {
     done: DoneIcon,
   }
 
-  const [dataCards, setDataCards] = useState<IDataCards | null>(null)
+  const [dataCards, setDataCards] = useState<IDataCards>()
   const [moveCardsParams, setMoveCardsParams] = useState<IMoveCardsParams>({
     cardId: 0,
     targetCol: 'unset',
@@ -42,22 +44,22 @@ export const Board = () => {
   //  todo:
   async function asyncGetCards() {
     try {
-      const todos = await request('/api/todos/', 'GET')
+      let todos = await request(
+          'api/todos/',
+          'GET',
+          null,
+          {Authorization: `Bearer ${userData.token}`}
+      )
+
+      todos = parseToObject(todos)
+
       setDataCards(todos)
     } catch (e) {}
   }
+
   useEffect(() => {
     asyncGetCards()
   }, [])
-
-  useEffect(() => {
-    console.log('dataCards', dataCards)
-  }, [dataCards])
-  //
-
-  useEffect(() => {
-    setDataCards(todos)
-  }, [todos])
 
   const dragOverCol = useRef<IMoveCardsParams['targetCol']>()
 
@@ -106,7 +108,7 @@ export const Board = () => {
 
   return (
     <div className="board">
-      {dataCards &&
+      {dataCards ?
         (Object.keys(dataCards) as Status[]).map((cardKey: Status) => (
           <div
             key={cardKey}
@@ -125,7 +127,7 @@ export const Board = () => {
                 <span>
                   {getColTitles(cardKey)}
                   <div className="header-count">
-                    <span>{dataCards[cardKey].length}</span>
+                    <span>{dataCards[cardKey]?.length}</span>
                   </div>
                 </span>
               </div>
@@ -153,7 +155,9 @@ export const Board = () => {
             </div>
             {cardKey === 'todo' && <CreateCard setIsCreateModalOpen={setIsCreateModalOpen} />}
           </div>
-        ))}
+        ))
+        : null
+      }
       <CreateTodoModal
         isOpen={isCreateModalOpen}
         onClose={() => setIsCreateModalOpen(false)}

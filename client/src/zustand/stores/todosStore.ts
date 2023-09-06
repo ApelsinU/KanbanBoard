@@ -13,19 +13,9 @@ export const useTodosStore = create<ITodosStore>()(
       devtools((set) => ({
         // we use 1000, 2000, 3000 for uniq ids in each col
         todos: {
-          todo: [
-            { id: 1001, title: 'Do tasks' },
-            { id: 1002, title: 'Install' },
-            { id: 1003, title: 'Train hard' },
-          ],
-          progress: [
-            { id: 2001, title: 'Delete' },
-            { id: 2002, title: 'Learn' },
-          ],
-          done: [
-            { id: 3001, title: 'Lunch' },
-            { id: 3002, title: 'Relax' },
-          ],
+            todo: [],
+            progress: [],
+            done: [],
         },
 
         addTodo: ({ id, title, status }) =>

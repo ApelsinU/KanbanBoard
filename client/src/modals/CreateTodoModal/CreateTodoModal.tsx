@@ -1,7 +1,8 @@
 import './create-todo-modal.scss'
 import React, { ChangeEvent, MouseEventHandler, SetStateAction, useState } from 'react'
 
-import { generateUniqId } from '@App/helpers/todosHelper'
+import {generateUniqId, parseToObject} from '@App/helpers/todosHelper'
+import {useAuth} from "@App/hooks/auth";
 import { useHttp } from '@App/hooks/http'
 import { Button } from '@App/ui/Button/Button'
 import { Input } from '@App/ui/Input/Input'
@@ -20,6 +21,7 @@ export const CreateTodoModal = ({ isOpen, onClose, modalTitle }: ICreateTodoModa
   const addTodo = useTodosStore((state) => state.addTodo)
   const [createCardValue, setCreateCardValue] = useState<string>('')
   const { request, isLoading } = useHttp()
+  const { userData } = useAuth()
 
   function onCreateClick(e: React.MouseEvent<HTMLButtonElement>) {
     if (!createCardValue) return
@@ -33,11 +35,16 @@ export const CreateTodoModal = ({ isOpen, onClose, modalTitle }: ICreateTodoModa
   }
 
   async function addTodoAsync() {
-    return await request('api/todos/add', 'POST', {
-      id: generateUniqId(todos, 'todo'),
-      title: createCardValue,
-      status: 'todo',
-    })
+    return await request(
+        'api/todos/add',
+        'POST',
+        {
+          id: generateUniqId(todos, 'todo'),
+          title: createCardValue,
+          status: 'todo',
+        },
+        {Authorization: `Bearer ${userData.token}`}
+    )
   }
 
   return (

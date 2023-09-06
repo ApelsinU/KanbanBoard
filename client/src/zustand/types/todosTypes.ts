@@ -15,6 +15,9 @@ export interface IDataCards {
 export interface ICardItem {
   title: string
   id: number
+  status?: Status
+  _id?: string
+  __v?: number
 }
 
 export type Status = 'todo' | 'progress' | 'done'
