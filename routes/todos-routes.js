@@ -9,8 +9,8 @@ module.exports = router;
 // api/todos/
 router.get("/", authInterceptor, async (req, res) => {
   try {
-    const todos = await Todo.find({ owner: req.user.userId });
-    console.log("todos", todos);
+    const todos = await Todo.find({owner: req.user.userId});
+
     res.json(todos);
     res.status(201);
   } catch (e) {
@@ -32,6 +32,9 @@ router.get("/:id", async (req, res) => {
 router.post("/add", authInterceptor, async (req, res) => {
   try {
     const { id, title, status } = req.body;
+    console.log('1',req.body)
+    console.log('2',req.user.userId)
+    const owner = req.user.userId
 
     const isExist = await Todo.findOne({ id: id });
     if (isExist) {
@@ -44,7 +47,7 @@ router.post("/add", authInterceptor, async (req, res) => {
       id: id,
       title: title,
       status: status,
-      owner: req.user.userId,
+      owner: owner,
     });
 
     await todo.save();
