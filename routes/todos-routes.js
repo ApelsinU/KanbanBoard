@@ -6,6 +6,7 @@ const authInterceptor = require("../interceptors/auth-interceptor");
 const router = Router();
 module.exports = router;
 
+// OK
 // api/todos/
 router.get("/", authInterceptor, async (req, res) => {
   try {
@@ -18,6 +19,7 @@ router.get("/", authInterceptor, async (req, res) => {
   }
 });
 
+// todo
 // api/todos/{id}
 router.get("/:id", async (req, res) => {
   try {
@@ -28,6 +30,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// OK
 // api/todos/add
 router.post("/add", authInterceptor, async (req, res) => {
   try {
@@ -58,6 +61,7 @@ router.post("/add", authInterceptor, async (req, res) => {
   }
 });
 
+// OK
 // api/todos/edit
 router.put("/edit", async (req, res) => {
   try {
@@ -80,6 +84,7 @@ router.put("/edit", async (req, res) => {
   }
 });
 
+// todo: don't work, check why
 // api/todos/move
 router.put("/move", async (req, res) => {
   try {
@@ -102,6 +107,7 @@ router.put("/move", async (req, res) => {
   }
 });
 
+// OK
 // api/todos/delete
 router.delete("/delete", async (req, res) => {
   try {

@@ -106,6 +106,12 @@ export const Board = () => {
     }
   }
 
+  function closeEditModal () {
+    setEditModalInfo(null)
+    asyncGetCards()
+  }
+
+
   return (
     <div className="board">
       {dataCards ?
@@ -166,7 +172,7 @@ export const Board = () => {
       <EditTodoModal
         isOpen={!!editModalInfo}
         editModalInfo={editModalInfo}
-        onClose={() => setEditModalInfo(null)}
+        onClose={() => closeEditModal()}
         modalTitle="Edit Todo"
       />
     </div>

@@ -13,7 +13,7 @@ export const Card = ({
   setMoveCardsParams,
   setSelectedCard,
   initCol,
-  setEditModalInfo,
+  setEditModalInfo
 }: ICardProps) => {
   const deleteTodo = useTodosStore((state) => state.deleteTodo)
   const { request } = useHttp()
@@ -36,7 +36,7 @@ export const Card = ({
   }
 
   function handleDeleteClick() {
-    deleteTodoAsync().then(() => deleteTodo({ id: item.id })) // DB
+    deleteTodoAsync()//.then(() => deleteTodo({ id: item.id })) // DB
   }
 
   function handleEditClick() {

@@ -33,8 +33,7 @@ export const EditTodoModal = ({ isOpen, onClose, modalTitle, editModalInfo }: IE
       editTodo({ id: todo?.id, title: todo.title, status: todo.status })
       setEditCardTitle('')
       !isLoading && onClose(e)
-    }) // DB
-    fetchTodos().then((res: any) => console.log(res)) // DB
+    })
   }
 
   async function editTodoAsync() {
@@ -45,7 +44,7 @@ export const EditTodoModal = ({ isOpen, onClose, modalTitle, editModalInfo }: IE
     })
   }
 
-  async function fetchTodos() {
+/*  async function fetchTodos() {
     return await request(
         'api/todos/',
         'GET',
@@ -53,6 +52,7 @@ export const EditTodoModal = ({ isOpen, onClose, modalTitle, editModalInfo }: IE
         {Authorization: `Bearer ${userData.token}`}
     )
   }
+  */
 
   useEffect(() => {
     editModalInfo && editModalInfo.title && setEditCardTitle(editModalInfo.title)

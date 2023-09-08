@@ -17,26 +17,33 @@
 
 
 ## ToDo
-### Business
-- Save Cards to user account (sync with backend)
-- Add groups (categories) for Card
-- Add additional filed Description to Card
-- Add ability to create/rename/delete new Kanban board
-- Multiply Kanban boards on page
+### Common
+HIGH
+- KANBAN RELOAD   :  Check and fix Kanban board (why page need reload to see changes)
+edit - ok
 
-### Structure
+- MOVE            :  Fix Move event
+- LOGOUT          :  Logout user, when token expired
+- NOTIFICATIONS   :  Add errors/success messages to log/reg pages
+
+TESTING
+- Save Cards to user account (sync with backend)
+
+LOW
+- MULTIPLE BOARDS    : Multiply Kanban boards on page. Add ability to create/rename/delete new Kanban board
+- ROLES              : Add Roles (admin, user, demo)
+
+???
+- Add groups (categories) for Card
+- Add additional field "Description" to Card
+
+### Roles
 - Add roles: **Admin**, **User**
 - Add modes:
   - **Admin** (can Manage all registered users),
   - **User**,
   - **Demo** (work only on store with persist, cant view Account info and save todos to backend)
 
-### Auth
-- Add notifications and errors to frontend
-
-### Mongo-DB
-- Connect cards list to DB
-- Write add, delete, edit requests to DB
 
 ## Links
 - icons - https://www.svgrepo.com/collection/kalai-oval-interface-icons/10
