@@ -1,7 +1,6 @@
 import './edit-todo-modal.scss'
-import {ChangeEvent, MouseEventHandler, SetStateAction, useContext, useEffect, useState} from 'react'
+import {ChangeEvent, MouseEventHandler, SetStateAction, useEffect, useState} from 'react'
 
-import {useAuth} from "@App/hooks/auth";
 import { useHttp } from '@App/hooks/http'
 import { Button } from '@App/ui/Button/Button'
 import { Input } from '@App/ui/Input/Input'
@@ -21,8 +20,6 @@ export const EditTodoModal = ({ isOpen, onClose, modalTitle, editModalInfo }: IE
   const editTodo = useTodosStore((state) => state.editTodo)
   const [editCardTitle, setEditCardTitle] = useState<string>('')
   const { request, isLoading } = useHttp()
-
-  const { userData } = useAuth()
 
   function onEditClick(e: any) {
     if (!editCardTitle) return null
@@ -44,7 +41,8 @@ export const EditTodoModal = ({ isOpen, onClose, modalTitle, editModalInfo }: IE
     })
   }
 
-/*  async function fetchTodos() {
+/*
+  async function fetchTodos() {
     return await request(
         'api/todos/',
         'GET',
@@ -52,7 +50,7 @@ export const EditTodoModal = ({ isOpen, onClose, modalTitle, editModalInfo }: IE
         {Authorization: `Bearer ${userData.token}`}
     )
   }
-  */
+*/
 
   useEffect(() => {
     editModalInfo && editModalInfo.title && setEditCardTitle(editModalInfo.title)

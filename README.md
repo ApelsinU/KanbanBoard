@@ -19,12 +19,13 @@
 ## ToDo
 ### Common
 HIGH
-- KANBAN RELOAD   :  Check and fix Kanban board (why page need reload to see changes)
+- KANBAN RELOAD   :  Fix Kanban board - need to fetch todos after changes => solution - move all fetch logic to Store with async
 edit - ok
 
 - MOVE            :  Fix Move event
 - LOGOUT          :  Logout user, when token expired
 - NOTIFICATIONS   :  Add errors/success messages to log/reg pages
+- INF SCROLL      :  Intersection Observer + Virtual Scroll
 
 TESTING
 - Save Cards to user account (sync with backend)

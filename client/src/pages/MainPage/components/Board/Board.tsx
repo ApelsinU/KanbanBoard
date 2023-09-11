@@ -41,7 +41,6 @@ export const Board = () => {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState<SetStateAction<boolean>>(false)
   const [editModalInfo, setEditModalInfo] = useState<IEditTodo | null>(null)
 
-  //  todo:
   async function asyncGetCards() {
     try {
       let todos = await request(
