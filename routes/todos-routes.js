@@ -35,8 +35,6 @@ router.get("/:id", async (req, res) => {
 router.post("/add", authInterceptor, async (req, res) => {
   try {
     const { id, title, status } = req.body;
-    console.log('1',req.body)
-    console.log('2',req.user.userId)
     const owner = req.user.userId
 
     const isExist = await Todo.findOne({ id: id });
@@ -91,16 +89,15 @@ router.put("/move", async (req, res) => {
     const { id, new_id, new_status } = req.body;
 
     const todo = await Todo.findOne({ id: id });
+
     if (!todo) {
       return res.json({
         message: `Error - Todo with such Id doesn't exist`,
       });
     }
 
-    await todo.update({ new_id, title: todo.title, new_status });
-    const newTodo = await Todo.findOne({ id: new_id });
+    await todo.update({ id: new_id, title: todo.title, status: new_status });
 
-    res.json(newTodo);
     res.status(201);
   } catch (e) {
     res.status(500).json({ message: "Something went wrong..." });

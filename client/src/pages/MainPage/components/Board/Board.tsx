@@ -70,6 +70,7 @@ export const Board = () => {
   useEffect(() => {
     if (dataCards && moveCardsParams.cardId !== 0) {
       moveTodoAsync()
+      asyncGetCards()
     }
 
     setMoveCardsParams({
@@ -84,10 +85,11 @@ export const Board = () => {
     if (moveCardsParams.targetCol === 'unset') return null
     if (moveCardsParams.sourceCol === 'unset') return null
     if (moveCardsParams.targetCol === moveCardsParams.sourceCol) return null
+    if (!dataCards) return null
 
     return await request('api/todos/move', 'PUT', {
       id: moveCardsParams.cardId,
-      new_id: generateUniqId(todos, moveCardsParams.targetCol),
+      new_id: generateUniqId(dataCards, moveCardsParams.targetCol),
       new_status: moveCardsParams.targetCol,
     })
   }

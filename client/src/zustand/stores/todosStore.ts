@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import { devtools, persist } from 'zustand/middleware'
 import { immer } from 'zustand/middleware/immer'
 
-import { generateUniqId } from '@App/helpers/todosHelper'
+import {generateUniqId, generateUniqIdForStore} from '@App/helpers/todosHelper'
 import { ICardItem, ITodosStore, Status } from '@App/zustand/types/todosTypes'
 
 export const useTodosStore = create<ITodosStore>()(
@@ -36,10 +36,10 @@ export const useTodosStore = create<ITodosStore>()(
             let deleted = false
             ;(Object.keys(state.todos) as Status[]).forEach((status: Status) => {
               state.todos[status] = state.todos[status].filter((card: ICardItem, index: number) => {
-                if (deleted) return (card.id = generateUniqId(state.todos, status, index))
+                if (deleted) return (card.id = generateUniqIdForStore(state.todos, status, index))
 
                 if (card.id !== id) {
-                  return (card.id = generateUniqId(state.todos, status, index + 1))
+                  return (card.id = generateUniqIdForStore(state.todos, status, index + 1))
                 } else {
                   deleted = true
                   return null
@@ -55,7 +55,7 @@ export const useTodosStore = create<ITodosStore>()(
             if (sourceCol === 'unset') return null
             if (targetCol === sourceCol) return null
 
-            const uId = generateUniqId(state.todos, targetCol)
+            const uId = generateUniqIdForStore(state.todos, targetCol)
             state.addTodo({ id: uId, title, status: targetCol })
             state.deleteTodo({ id })
 

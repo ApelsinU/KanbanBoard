@@ -39,9 +39,27 @@ export function parseToObject(todosArr: ICardItem[]) {
   return obj
 }
 
-export function generateUniqId(todos: IDataCards, status: Status, index?: number) {
+export function generateUniqIdForStore(todos: IDataCards, status: Status, index?: number) {
   const idCol = (Object.keys(todos).indexOf(status) + 1) * 1000
   const idRow = index ? index : todos[status].length + 1
 
   return idCol + idRow
+}
+
+export function generateUniqId(todos: IDataCards, status: Status) {
+  const currentIds = todos[status].map((todo => todo.id))
+  let newId = 0;
+
+  const idCol = (Object.keys(todos).indexOf(status) + 1) * 1000
+
+  for (let i = 1; i < idCol * 1000; i++) {
+    if (!currentIds.includes(idCol + i)) {
+      newId = idCol + i
+      break;
+    }
+  }
+
+  console.log(newId)
+
+  return newId
 }

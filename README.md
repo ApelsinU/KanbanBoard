@@ -22,7 +22,7 @@ HIGH
 - KANBAN RELOAD   :  Fix Kanban board - need to fetch todos after changes => solution - move all fetch logic to Store with async
 edit - ok
 
-- MOVE            :  Fix Move event
+~~- MOVE            :  Fix Move event~~
 - LOGOUT          :  Logout user, when token expired
 - NOTIFICATIONS   :  Add errors/success messages to log/reg pages
 - INF SCROLL      :  Intersection Observer + Virtual Scroll
