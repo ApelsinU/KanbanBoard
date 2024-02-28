@@ -18,7 +18,7 @@ export const AccountPage = () => {
         <p className={'user-id'}>
           UserId:{' '}
           <b>
-            <i>{userId}</i>s
+            <i>{userId}</i>
           </b>
         </p>
         <Button text="Log Out" onClick={logout} height={45} />

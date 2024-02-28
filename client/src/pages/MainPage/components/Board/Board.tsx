@@ -57,6 +57,12 @@ export const Board = () => {
   }
 
   useEffect(() => {
+    if (isCreateModalOpen === false) {
+      asyncGetCards()
+    }
+  }, [isCreateModalOpen])
+
+  useEffect(() => {
     asyncGetCards()
   }, [])
 

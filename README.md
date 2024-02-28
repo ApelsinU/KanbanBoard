@@ -19,8 +19,8 @@
 ## ToDo
 ### Common
 HIGH
-- KANBAN RELOAD   :  Fix Kanban board - need to fetch todos after changes => solution - move all fetch logic to Store with async
-edit - ok
+~~- KANBAN RELOAD~~
+~~edit - ok~~
 
 ~~- MOVE            :  Fix Move event~~
 - LOGOUT          :  Logout user, when token expired
