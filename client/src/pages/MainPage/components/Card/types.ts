@@ -8,4 +8,5 @@ export interface ICardProps {
   setSelectedCard: (moveCardParams: ISelectedCard) => void
   initCol: Status
   setEditModalInfo: (editModalInfo: IEditTodo | null) => void
+  updateTodosBoard: any
 }

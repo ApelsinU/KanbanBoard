@@ -19,17 +19,6 @@ router.get("/", authInterceptor, async (req, res) => {
   }
 });
 
-// todo
-// api/todos/{id}
-router.get("/:id", async (req, res) => {
-  try {
-    // const todo = await Todo.findById(req.params.id);
-    // res.json(todo);
-  } catch (e) {
-    res.status(500).json({ message: "Something went wrong..." });
-  }
-});
-
 // OK
 // api/todos/add
 router.post("/add", authInterceptor, async (req, res) => {
@@ -96,11 +85,13 @@ router.put("/move", async (req, res) => {
       });
     }
 
-    await todo.update({ id: new_id, title: todo.title, status: new_status });
+    await todo.updateOne({ id: new_id, title: todo.title, status: new_status });
+    // id - repeated keys error
+    // await todo.updateOne({ id: 999, title: todo.title, status: new_status });
 
-    res.status(201);
+    res.status(200).json({ success: true});
   } catch (e) {
-    res.status(500).json({ message: "Something went wrong..." });
+    res.status(500).json(e);
   }
 });
 
@@ -108,7 +99,7 @@ router.put("/move", async (req, res) => {
 // api/todos/delete
 router.delete("/delete", async (req, res) => {
   try {
-    const { id, status } = req.body;
+    const { id } = req.body;
 
     const todo = await Todo.findOne({ id: id });
     if (!todo) {
@@ -117,8 +108,8 @@ router.delete("/delete", async (req, res) => {
       });
     }
 
-    await todo.deleteOne({ id });
-    res.status(201);
+    await todo.deleteOne({ id: id });
+    res.status(200).json({ success: true});
   } catch (e) {
     res.status(500).json({ message: "Something went wrong..." });
   }

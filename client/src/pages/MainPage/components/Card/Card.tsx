@@ -5,7 +5,6 @@ import { DeleteBinIcon, EditIcon } from '@Assets/icons/StrokeIcons'
 import { useHttp } from '@App/hooks/http'
 import { ICardProps } from '@App/pages/MainPage/components/Card/types'
 import { CardControl } from '@App/pages/MainPage/components/CardControl/CardControl'
-import { useTodosStore } from '@App/zustand/stores/todosStore'
 
 export const Card = ({
   item,
@@ -13,9 +12,9 @@ export const Card = ({
   setMoveCardsParams,
   setSelectedCard,
   initCol,
-  setEditModalInfo
+  setEditModalInfo,
+  updateTodosBoard
 }: ICardProps) => {
-  const deleteTodo = useTodosStore((state) => state.deleteTodo)
   const { request } = useHttp()
 
   const dragStart = () => {
@@ -36,14 +35,14 @@ export const Card = ({
   }
 
   function handleDeleteClick() {
-    deleteTodoAsync()//.then(() => deleteTodo({ id: item.id })) // DB
+    deleteTodoAsync().then(() => updateTodosBoard())
   }
 
   function handleEditClick() {
     setEditModalInfo({ id: item.id, status: initCol, title: item.title })
   }
   async function deleteTodoAsync() {
-    return await request('api/todos/delete', 'DELETE', { id: item.id })
+    return await request('api/todos/delete/', 'DELETE', { id: item.id })
   }
 
   return (

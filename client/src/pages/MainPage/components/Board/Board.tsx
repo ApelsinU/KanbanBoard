@@ -5,7 +5,7 @@ import DoneIcon from '@Assets/images/accepted.png'
 import ToDoListIcon from '@Assets/images/check-list.png'
 import TimeIcon from '@Assets/images/hourglass.png'
 
-import {generateUniqId, parseToObject, useTodosHelper} from '@App/helpers/todosHelper'
+import {generateUniqId, generateUniqIdForStore, parseToObject, useTodosHelper} from '@App/helpers/todosHelper'
 import {useAuth} from "@App/hooks/auth";
 import { useHttp } from '@App/hooks/http'
 import { CreateTodoModal } from '@App/modals/CreateTodoModal/CreateTodoModal'
@@ -75,8 +75,7 @@ export const Board = () => {
 
   useEffect(() => {
     if (dataCards && moveCardsParams.cardId !== 0) {
-      moveTodoAsync()
-      asyncGetCards()
+      moveTodoAsync().then(() => asyncGetCards())
     }
 
     setMoveCardsParams({
@@ -155,6 +154,7 @@ export const Board = () => {
                 setSelectedCard={setSelectedCard}
                 setMoveCardsParams={setMoveCardsParams}
                 setEditModalInfo={setEditModalInfo}
+                updateTodosBoard={asyncGetCards}
               />
             ))}
             <div

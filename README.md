@@ -1,3 +1,7 @@
+## Run 
+- If Proxy error - check the MongoDB cluster
+
+
 ## Client
 - React
 - TypeScript 
@@ -22,7 +26,8 @@ HIGH
 ~~- KANBAN RELOAD~~
 ~~edit - ok~~
 
-~~- MOVE            :  Fix Move event~~
+~~- DELETE            :  Fix delete event~~
+- MOVE            :  Fix Move event to second col
 - LOGOUT          :  Logout user, when token expired
 - NOTIFICATIONS   :  Add errors/success messages to log/reg pages
 - INF SCROLL      :  Intersection Observer + Virtual Scroll
