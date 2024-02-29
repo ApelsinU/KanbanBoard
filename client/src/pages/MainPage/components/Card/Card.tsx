@@ -45,9 +45,12 @@ export const Card = ({
     return await request('api/todos/delete/', 'DELETE', { id: item.id })
   }
 
+  const debugId = item.id
+
   return (
     <div className="card" draggable onDragStart={dragStart} onDragEnd={dragEnd}>
-      {item.id} {item.title}
+      {/*{debugId}*/}
+      {item.title}
       <div className={'controls-block'}>
         <CardControl icon={<EditIcon />} onClick={handleEditClick} />
         <CardControl icon={<DeleteBinIcon />} onClick={handleDeleteClick} />

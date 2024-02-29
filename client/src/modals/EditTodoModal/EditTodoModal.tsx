@@ -4,7 +4,6 @@ import {ChangeEvent, MouseEventHandler, SetStateAction, useEffect, useState} fro
 import { useHttp } from '@App/hooks/http'
 import { Button } from '@App/ui/Button/Button'
 import { Input } from '@App/ui/Input/Input'
-import { useTodosStore } from '@App/zustand/stores/todosStore'
 import { IEditTodo } from '@App/zustand/types/todosTypes'
 
 import { Modal } from '../Modal'
@@ -17,7 +16,6 @@ interface IEditTodoModal {
 }
 
 export const EditTodoModal = ({ isOpen, onClose, modalTitle, editModalInfo }: IEditTodoModal) => {
-  const editTodo = useTodosStore((state) => state.editTodo)
   const [editCardTitle, setEditCardTitle] = useState<string>('')
   const { request, isLoading } = useHttp()
 
@@ -25,9 +23,7 @@ export const EditTodoModal = ({ isOpen, onClose, modalTitle, editModalInfo }: IE
     if (!editCardTitle) return null
     if (!editModalInfo) return null
 
-    editTodoAsync().then((res) => {
-      const todo = res.todo ? res.todo : res
-      editTodo({ id: todo?.id, title: todo.title, status: todo.status })
+    editTodoAsync().then(() => {
       setEditCardTitle('')
       !isLoading && onClose(e)
     })
@@ -40,17 +36,6 @@ export const EditTodoModal = ({ isOpen, onClose, modalTitle, editModalInfo }: IE
       title: editCardTitle,
     })
   }
-
-/*
-  async function fetchTodos() {
-    return await request(
-        'api/todos/',
-        'GET',
-        null,
-        {Authorization: `Bearer ${userData.token}`}
-    )
-  }
-*/
 
   useEffect(() => {
     editModalInfo && editModalInfo.title && setEditCardTitle(editModalInfo.title)

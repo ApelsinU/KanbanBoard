@@ -1,12 +1,13 @@
 import './create-todo-modal.scss'
 import React, { ChangeEvent, MouseEventHandler, SetStateAction, useState } from 'react'
 
-import {generateUniqId, parseToObject} from '@App/helpers/todosHelper'
+import {generateUniqId} from '@App/helpers/todosHelper'
 import {useAuth} from "@App/hooks/auth";
 import { useHttp } from '@App/hooks/http'
 import { Button } from '@App/ui/Button/Button'
 import { Input } from '@App/ui/Input/Input'
-import { useTodosStore } from '@App/zustand/stores/todosStore'
+import {useUserStore} from "@App/zustand/stores/userStore";
+import {IDataCards} from "@App/zustand/types/todosTypes";
 
 import { Modal } from '../Modal'
 
@@ -14,21 +15,19 @@ interface ICreateTodoModal {
   isOpen: SetStateAction<boolean>
   onClose: MouseEventHandler<HTMLButtonElement>
   modalTitle: string
+  dataCards: IDataCards
 }
 
-export const CreateTodoModal = ({ isOpen, onClose, modalTitle }: ICreateTodoModal) => {
-  const todos = useTodosStore((state) => state.todos)
-  const addTodo = useTodosStore((state) => state.addTodo)
+export const CreateTodoModal = ({ isOpen, onClose, modalTitle, dataCards }: ICreateTodoModal) => {
   const [createCardValue, setCreateCardValue] = useState<string>('')
   const { request, isLoading } = useHttp()
   const { userData } = useAuth()
+  const userId = useUserStore((state) => state.userData.userId)
 
   function onCreateClick(e: React.MouseEvent<HTMLButtonElement>) {
     if (!createCardValue) return
 
-    addTodoAsync().then((res) => {
-      const todo = res.todo ? res.todo : res
-      addTodo({ id: todo?.id, title: todo.title, status: todo.status })
+    addTodoAsync().then(() => {
       setCreateCardValue('')
       !isLoading && onClose(e)
     })
@@ -39,7 +38,7 @@ export const CreateTodoModal = ({ isOpen, onClose, modalTitle }: ICreateTodoModa
         'api/todos/add',
         'POST',
         {
-          id: generateUniqId(todos, 'todo'),
+          id: generateUniqId(dataCards, 'todo', userId),
           title: createCardValue,
           status: 'todo',
         },

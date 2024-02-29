@@ -33,8 +33,8 @@ export const useTodosStore = create<ITodosStore>()(
         // Delete card and shift array
         deleteTodo: ({ id }) =>
           set((state) => {
-            let deleted = false
-            ;(Object.keys(state.todos) as Status[]).forEach((status: Status) => {
+            let deleted = false;
+            (Object.keys(state.todos) as Status[]).forEach((status: Status) => {
               state.todos[status] = state.todos[status].filter((card: ICardItem, index: number) => {
                 if (deleted) return (card.id = generateUniqIdForStore(state.todos, status, index))
 

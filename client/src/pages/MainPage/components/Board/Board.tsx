@@ -1,28 +1,26 @@
-import React, { DragEvent, SetStateAction, useCallback, useEffect, useRef, useState } from 'react'
+import React, { DragEvent, SetStateAction, useEffect, useRef, useState } from 'react'
 import './board.scss'
 
 import DoneIcon from '@Assets/images/accepted.png'
 import ToDoListIcon from '@Assets/images/check-list.png'
 import TimeIcon from '@Assets/images/hourglass.png'
 
-import {generateUniqId, generateUniqIdForStore, parseToObject, useTodosHelper} from '@App/helpers/todosHelper'
+import {generateUniqId, parseToObject} from '@App/helpers/todosHelper'
 import {useAuth} from "@App/hooks/auth";
 import { useHttp } from '@App/hooks/http'
 import { CreateTodoModal } from '@App/modals/CreateTodoModal/CreateTodoModal'
 import { EditTodoModal } from '@App/modals/EditTodoModal/EditTodoModal'
 import { IMoveCardsParams, ISelectedCard } from '@App/pages/MainPage/components/Board/types'
-import { useTodosStore } from '@App/zustand/stores/todosStore'
+import {useUserStore} from "@App/zustand/stores/userStore";
 import { ICardItem, IDataCards, IEditTodo, Status } from '@App/zustand/types/todosTypes'
 
 import { Card } from '../Card/Card'
 import { CreateCard } from '../CreateCard/CreateCard'
 
 export const Board = () => {
-  const todos = useTodosStore((state) => state.todos)
-  // const addTodo = useTodosStore((state) => state.addTodo)
-  // const deleteTodo = useTodosStore((state) => state.deleteTodo)
   const { request } = useHttp()
   const { userData } = useAuth()
+  const userId = useUserStore((state) => state.userData.userId)
 
   const CardsIcons = {
     todo: ToDoListIcon,
@@ -32,7 +30,7 @@ export const Board = () => {
 
   const [dataCards, setDataCards] = useState<IDataCards>()
   const [moveCardsParams, setMoveCardsParams] = useState<IMoveCardsParams>({
-    cardId: 0,
+    cardId: '',
     targetCol: 'unset',
     sourceCol: 'unset',
     cardText: '',
@@ -74,12 +72,12 @@ export const Board = () => {
   }
 
   useEffect(() => {
-    if (dataCards && moveCardsParams.cardId !== 0) {
+    if (dataCards && moveCardsParams.cardId !== '') {
       moveTodoAsync().then(() => asyncGetCards())
     }
 
     setMoveCardsParams({
-      cardId: 0,
+      cardId: '',
       targetCol: 'unset',
       sourceCol: 'unset',
       cardText: '',
@@ -94,7 +92,7 @@ export const Board = () => {
 
     return await request('api/todos/move', 'PUT', {
       id: moveCardsParams.cardId,
-      new_id: generateUniqId(dataCards, moveCardsParams.targetCol),
+      new_id: generateUniqId(dataCards, moveCardsParams.targetCol, userId),
       new_status: moveCardsParams.targetCol,
     })
   }
@@ -102,11 +100,11 @@ export const Board = () => {
   function getColTitles(status: Status) {
     switch (status) {
       case 'todo':
-        return 'ToDo'
+        return 'to do'
       case 'progress':
-        return 'In Progress'
+        return 'in progress'
       case 'done':
-        return 'Done'
+        return 'done'
       default:
         return ''
     }
@@ -121,6 +119,7 @@ export const Board = () => {
   return (
     <div className="board">
       {dataCards ?
+
         (Object.keys(dataCards) as Status[]).map((cardKey: Status) => (
           <div
             key={cardKey}
@@ -171,11 +170,17 @@ export const Board = () => {
         ))
         : null
       }
-      <CreateTodoModal
-        isOpen={isCreateModalOpen}
-        onClose={() => setIsCreateModalOpen(false)}
-        modalTitle="Create new Task"
-      />
+
+      {dataCards ? (
+          <CreateTodoModal
+              isOpen={isCreateModalOpen}
+              onClose={() => setIsCreateModalOpen(false)}
+              modalTitle="Create new Task"
+              dataCards={dataCards}
+          />
+        ) : null
+      }
+
       <EditTodoModal
         isOpen={!!editModalInfo}
         editModalInfo={editModalInfo}

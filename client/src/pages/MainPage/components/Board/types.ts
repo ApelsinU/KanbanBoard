@@ -1,14 +1,14 @@
 import { Status } from '@App/zustand/types/todosTypes'
 
 export interface IMoveCardsParams {
-  cardId: number
+  cardId: string
   targetCol: Status | 'unset'
   sourceCol: Status | 'unset'
   cardText: string
 }
 
 export interface ISelectedCard {
-  cardId: number
+  cardId: string
   cardText: string
   initCol: Status
 }

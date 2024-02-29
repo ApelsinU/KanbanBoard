@@ -14,7 +14,7 @@ export interface IDataCards {
 
 export interface ICardItem {
   title: string
-  id: number
+  id: string
   status?: Status
   _id?: string
   __v?: number
@@ -24,22 +24,22 @@ export type Status = 'todo' | 'progress' | 'done'
 
 export interface IAddTodo {
   title: string
-  id: number
+  id: string
   status: Status
 }
 
 export interface IEditTodo {
-  id: number
+  id: string
   status: Status
   title: string
 }
 
 export interface IDeleteTodo {
-  id: number
+  id: string
 }
 
 export interface IRefreshTodos {
-  id: number
+  id: string
   title: string
   sourceCol: Status | 'unset'
   targetCol: Status | 'unset'

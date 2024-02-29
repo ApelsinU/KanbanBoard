@@ -1,4 +1,5 @@
 import { useTodosStore } from '@App/zustand/stores/todosStore'
+import {useUserStore} from "@App/zustand/stores/userStore";
 import { IDataCards, ICardItem, Status } from '@App/zustand/types/todosTypes'
 
 // todo: need to refactor: remove hook and rewrite methods
@@ -43,13 +44,16 @@ export function generateUniqIdForStore(todos: IDataCards, status: Status, index?
   const idCol = (Object.keys(todos).indexOf(status) + 1) * 1000
   const idRow = index ? index : todos[status].length + 1
 
-  return idCol + idRow
+  const id = idCol + idRow
+  return id.toString()
 }
 
-export function generateUniqId(todos: IDataCards, status: Status) {
-  const currentIds = todos[status].map((todo => todo.id))
-  let newId = 0;
+export function generateUniqId(todos: IDataCards, status: Status, userId: string) {
+  const currentIds = todos[status].map((todo => {
+    return Number(todo.id.split('_')[0])
+  }))
 
+  let newId = 0;
   const idCol = (Object.keys(todos).indexOf(status) + 1) * 1000
 
   for (let i = 1; i < idCol * 1000; i++) {
@@ -59,7 +63,5 @@ export function generateUniqId(todos: IDataCards, status: Status) {
     }
   }
 
-  console.log(newId)
-
-  return newId
+  return `${newId}_${userId}`
 }

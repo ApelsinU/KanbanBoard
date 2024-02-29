@@ -30,23 +30,30 @@
   }
 
   .header-icon {
+    flex-shrink: 0;
     width: 28px;
     margin-right: 10px;
   }
 
   .header-text {
-    font-weight: 600;
-    text-transform: capitalize;
+    display: flex;
+    align-items: center;
+    height: 28px;
+    white-space: nowrap;
+    text-transform: uppercase;
 
     span {
       position: relative;
+      font-weight: 600;
+      font-size: 17px;
+      line-height: 17px;
     }
   }
 
   .header-count {
     position: absolute;
     top: -7px;
-    right: -22px;
+    right: -26px;
     display: flex;
     align-items: center;
     justify-content: center;

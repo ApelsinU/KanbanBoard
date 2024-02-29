@@ -23,17 +23,10 @@
 ## ToDo
 ### Common
 HIGH
-~~- KANBAN RELOAD~~
-~~edit - ok~~
-
-~~- DELETE            :  Fix delete event~~
-- MOVE            :  Fix Move event to second col
+- STORE           :  Rewrite logic on store or remove TodosStore
 - LOGOUT          :  Logout user, when token expired
 - NOTIFICATIONS   :  Add errors/success messages to log/reg pages
 - INF SCROLL      :  Intersection Observer + Virtual Scroll
-
-TESTING
-- Save Cards to user account (sync with backend)
 
 LOW
 - MULTIPLE BOARDS    : Multiply Kanban boards on page. Add ability to create/rename/delete new Kanban board
